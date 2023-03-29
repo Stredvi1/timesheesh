@@ -89,3 +89,26 @@
     flex-direction: column;
   }
 }
+
+.upperBox {
+  padding: 4rem 8rem;
+  background: green;
+  margin-bottom: 6rem;
+  color: white;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  padding: 0rem 4rem;
+  margin: 0;
+}

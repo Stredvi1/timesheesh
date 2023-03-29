@@ -5,33 +5,19 @@ import * as m from '@mui/material';
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>TimeSheet</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
-      <main>
+     
         
-        <m.Typography variant="h1">TimeSheet</m.Typography>
+        <m.Typography variant="h1">TimeShift</m.Typography>
         <m.TextField id="outlined-basic" label="E-mail" variant="outlined" />
         <m.TextField id="outlined-basic" label="Password" variant="outlined" />
         
 
-        <m.Button variant="contained" href="#text-buttons">Přihlásit se</m.Button>
+        <m.Button variant="contained" href="./overview">Přihlásit se</m.Button>
 
         
-    
-      </main>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by Vašek a Vito
-        </a>
-      </footer>
+      
 
       <style jsx>{`
         main {
