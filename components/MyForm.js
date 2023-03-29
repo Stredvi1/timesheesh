@@ -17,7 +17,7 @@ export default function MyForm() {
             password: '',
             confirmPassword: ''
         },
-        validationSchema: {RegistrationSchema},
+        validationSchema: RegistrationSchema,
         onSubmit: (values) => {
             console.log(values);
         },
