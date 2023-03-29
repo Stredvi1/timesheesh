@@ -6,6 +6,7 @@ import MyForm from '../components/MyForm'
 import RegistrationForm from '../components/Form/registrationForm'
 
 
+
 export default function newUser() {
 
     return (
