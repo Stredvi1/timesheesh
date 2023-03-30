@@ -16,7 +16,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             TimeShift
           </Typography>
-          <Button color="inherit">Přidat uživatele</Button>
+          <Button color="inherit" href={'/newUser'}>Přidat uživatele</Button>
           <Button color="inherit">Odhlášení</Button>
         </Toolbar>
       </AppBar>

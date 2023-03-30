@@ -1,7 +1,7 @@
 'use client';
 
 import {useFormik} from "formik";
-import * as m from "@mui/material";
+import {Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button} from "@mui/material";
 import React from "react";
 import {RegistrationSchema} from "./Form/registrationSchema";
 
@@ -31,18 +31,18 @@ export default function MyForm() {
 
             <form onSubmit={formik.handleSubmit}>
 
-                <m.Stack
+                <Stack
                     direction="column"
                     spacing={6}
                     justifyContent="center"
                     alignItems="center"
                 >
 
-                    <m.Paper elevation={3}>
-                        <m.Box padding={4}>
-                            <m.Typography variant="h4">Osobní údaje</m.Typography>
-                                <m.Stack direction="row" spacing={2}>
-                                    <m.TextField
+                    <Paper elevation={3}>
+                        <Box padding={4}>
+                            <Typography variant="h4">Osobní údaje</Typography>
+                                <Stack direction="row" spacing={2}>
+                                    <TextField
                                         id="name"
                                         label="Jméno"
                                         required
@@ -51,7 +51,7 @@ export default function MyForm() {
                                         error={formik.touched.name && Boolean(formik.errors.name)}
                                         helperText={formik.touched.name && formik.errors.name}/>
 
-                                    <m.TextField
+                                    <TextField
                                         id="surname"
                                         label="Příjmení"
                                         required
@@ -61,7 +61,7 @@ export default function MyForm() {
                                         helperText={formik.touched.surname && formik.errors.surname}
                                     />
 
-                                    <m.TextField
+                                    <TextField
                                         id="birthNumber"
                                         label="Rodné číslo"
                                         required
@@ -71,12 +71,12 @@ export default function MyForm() {
                                         error={formik.touched.birthNumber && Boolean(formik.errors.birthNumber)}
                                         helperText={formik.touched.birthNumber && formik.errors.birthNumber}
                                     />
-                                </m.Stack>
+                                </Stack>
 
 
 
-                            <m.Stack direction="row" spacing={2}>
-                                <m.TextField
+                            <Stack direction="row" spacing={2}>
+                                <TextField
                                     id="bankAccount"
                                     label="Číslo účtu"
                                     variant="outlined"
@@ -87,7 +87,7 @@ export default function MyForm() {
                                 />
 
 
-                                <m.TextField
+                                <TextField
                                     id="bankCode"
                                     label="Kód banky"
                                     variant="outlined"
@@ -95,15 +95,15 @@ export default function MyForm() {
                                     {...formik.getFieldProps('bankCode')}
                                     error={formik.touched.bankCode && Boolean(formik.errors.bankCode)}
                                     helperText={formik.touched.bankCode && formik.errors.bankCode}/>
-                            </m.Stack>
-                        </m.Box>
-                    </m.Paper>
+                            </Stack>
+                        </Box>
+                    </Paper>
 
-                    <m.Paper elevation={3}>
-                        <m.Box padding={4}>
-                            <m.Typography variant="h4">Přihlašovací údaje</m.Typography>
-                            <m.Stack direction="column" spacing={2}>
-                                <m.TextField
+                    <Paper elevation={3}>
+                        <Box padding={4}>
+                            <Typography variant="h4">Přihlašovací údaje</Typography>
+                            <Stack direction="column" spacing={2}>
+                                <TextField
                                     id="email"
                                     label="Email"
                                     required
@@ -112,7 +112,7 @@ export default function MyForm() {
                                     error={formik.touched.email && Boolean(formik.errors.email)}
                                     helperText={formik.touched.email && formik.errors.email}/>
 
-                                <m.TextField
+                                <TextField
                                     id="password"
                                     label="Heslo"
                                     required
@@ -123,7 +123,7 @@ export default function MyForm() {
                                     error={formik.touched.password && Boolean(formik.errors.password)}
                                     helperText={formik.touched.password && formik.errors.password}/>
 
-                                <m.TextField
+                                <TextField
                                     id="confirmPassword"
                                     label="Heslo znovu"
                                     required
@@ -133,39 +133,40 @@ export default function MyForm() {
                                     error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                                     helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}/>
 
-                            </m.Stack>
-                        </m.Box>
-                    </m.Paper>
+                            </Stack>
+                        </Box>
+                    </Paper>
 
-                    <m.Paper elevation={3}>
-                        <m.Box padding={4}>
-                            <m.Typography variant="h4">Úroveň oprávnění</m.Typography>
-                            <m.Stack direction="column" spacing={2}>
+                    <Paper elevation={3}>
+                        <Box padding={4}>
+                            <Typography variant="h4">Úroveň oprávnění</Typography>
+                            <Stack direction="column" spacing={2}>
 
-                                <m.InputLabel id="permissions-label">Práva</m.InputLabel>
-                                <m.Select
+                                <InputLabel id="permissions-label">Práva</InputLabel>
+                                <Select
                                     labelId="permissions-label"
                                     id="new-user-permissions"
                                     value={permissionID}
                                     label="Práva">
-                                    <m.MenuItem value={10}>Ten</m.MenuItem>
-                                    <m.MenuItem value={20}>Twenty</m.MenuItem>
-                                    <m.MenuItem value={30}>Thirty</m.MenuItem>
-                                </m.Select>
+                                    <MenuItem value={1}>Administrátor</MenuItem>
+                                    <MenuItem value={2}>Projektant</MenuItem>
+                                    <MenuItem value={3}>Pracovník</MenuItem>
+                                    <MenuItem value={4}>Sledující</MenuItem>
+                                </Select>
 
 
-                                <m.Button
+                                <Button
                                     variant="text"
                                     href="./overview">Zrušit
-                                </m.Button>
-                                <m.Button
+                                </Button>
+                                <Button
                                     variant="contained"
                                     type="submit">Vytvořit uživatele
-                                </m.Button>
-                            </m.Stack>
-                        </m.Box>
-                    </m.Paper>
-                </m.Stack>
+                                </Button>
+                            </Stack>
+                        </Box>
+                    </Paper>
+                </Stack>
             </form>
 
         </>
