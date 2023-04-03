@@ -4,11 +4,11 @@ import {Typography, Box} from "@mui/material";
 import styles from "../styles/Home.module.css";
 import Date from "../formatters/dateTimeFormatter";
 import Currency from "../formatters/currencyFormatter";
+import Time from "../formatters/worktimeFormatter";
 
 
 export default function load(props) {
     const router = useRouter();
-    // props.id = router.query;
     console.log(props.id);
     const [dataResponse, setDataResponse] = useState([]);
 
@@ -18,7 +18,7 @@ export default function load(props) {
         }
 
         async function getPageData() {
-            const apiUrlEndpoint = `http://localhost:3000/api/getProjectData-lib`;
+            const apiUrlEndpoint = `http://localhost:3000/api/getActivityData-lib`;
             const postData = {
                 method: "Post",
                 headers: {"Content-Type": "application/json"},
@@ -29,7 +29,7 @@ export default function load(props) {
             const response = await fetch(apiUrlEndpoint, postData);
             const res = await response.json();
 
-            setDataResponse(res.projects);
+            setDataResponse(res.activity);
         }
 
         getPageData();
@@ -37,16 +37,19 @@ export default function load(props) {
     return (
         <>
 
-            {dataResponse?.map((project) => {
+            {dataResponse?.map((activity) => {
                     return (
 
                         <Box className={styles.upperBox} key={props.id}>
 
-                            <Typography variant="h3">{project.name}</Typography>
-                            <Typography>{project.note}</Typography>
-                            <Typography><strong>Budget: </strong><Currency string={project.budget}/></Typography>
-                            <Typography><strong>Deadline: </strong><Date string={project.deadline}/></Typography>
+                            <Typography variant="h3">{activity.name}</Typography>
+                            <Typography variant="overline">Projekt: {activity.projectName}</Typography>
+                            <Typography>{activity.note}</Typography>
 
+                            <Typography><strong>Přiřazeno: </strong> {activity.fullName}</Typography>
+                            <Typography><strong>Časofond: </strong> <Time string={activity.timefund}/></Typography>
+                            <Typography><strong>Odpracováno: </strong> <Time string={activity.workingTime}/></Typography>
+                            <Typography><strong>Hodinová sazba: </strong> <Currency string={activity.hourRate}/></Typography>
 
                         </Box>
                     )

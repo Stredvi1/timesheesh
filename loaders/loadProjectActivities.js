@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {Typography, Box} from "@mui/material";
-import styles from "../styles/Home.module.css";
-import Date from "../formatters/dateTimeFormatter";
-import Currency from "../formatters/currencyFormatter";
+import Card from "../components/activityCard";
+import Time from "../formatters/worktimeFormatter";
+
 
 
 export default function load(props) {
@@ -18,7 +17,7 @@ export default function load(props) {
         }
 
         async function getPageData() {
-            const apiUrlEndpoint = `http://localhost:3000/api/getProjectData-lib`;
+            const apiUrlEndpoint = `http://localhost:3000/api/getActivities-lib`;
             const postData = {
                 method: "Post",
                 headers: {"Content-Type": "application/json"},
@@ -29,7 +28,7 @@ export default function load(props) {
             const response = await fetch(apiUrlEndpoint, postData);
             const res = await response.json();
 
-            setDataResponse(res.projects);
+            setDataResponse(res.activities);
         }
 
         getPageData();
@@ -37,18 +36,18 @@ export default function load(props) {
     return (
         <>
 
-            {dataResponse?.map((project) => {
+            {dataResponse?.map((activity) => {
                     return (
 
-                        <Box className={styles.upperBox} key={props.id}>
-
-                            <Typography variant="h3">{project.name}</Typography>
-                            <Typography>{project.note}</Typography>
-                            <Typography><strong>Budget: </strong><Currency string={project.budget}/></Typography>
-                            <Typography><strong>Deadline: </strong><Date string={project.deadline}/></Typography>
-
-
-                        </Box>
+                        <Card
+                            key={activity.id}
+                            id={activity.id}
+                            projectID={activity.projectID}
+                            name={activity.name}
+                            timefund={<Time string={activity.timefund}/>}
+                            workingTime={<Time string={activity.workingTime}/>}
+                            fullName={activity.fullName}
+                        />
                     )
                 }
             )}

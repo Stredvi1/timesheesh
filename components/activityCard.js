@@ -5,8 +5,8 @@ import Currency from "../formatters/currencyFormatter";
 import Date from "../formatters/dateTimeFormatter";
 
 
-export default function ProjectCard(props) {
-    const ProjectCard = styled(Paper)(({ theme }) => ({
+export default function ActivityCard(props) {
+    const ActivityCard = styled(Paper)(({ theme }) => ({
         backgroundColor: '#edf4fc',
         ...theme.typography.body1,
         padding: theme.spacing(4),
@@ -14,14 +14,15 @@ export default function ProjectCard(props) {
     }));
 
     return(
-        <ProjectCard>
+        <ActivityCard>
             <Box>
                 <Typography variant="h4" color="primary">{props.name}</Typography>
             </Box>
 
-            <Typography><strong>Budget: </strong><Currency string={props.budget}/></Typography>
-            <Typography><strong>Deadline: </strong><Date string={props.deadline}/></Typography>
-            <Button variant="contained" href={`/project/${props.id}`}>Detail</Button>
-        </ProjectCard>
+            <Typography><strong>Přiřazeno: </strong>{props.fullName}</Typography>
+            <Typography><strong>Časofond: </strong>{props.timefund}</Typography>
+            <Typography><strong>Odpracováno: </strong>{props.workingTime}</Typography>
+            <Button variant="contained" href={`/activity/${props.id}`}>Detail</Button>
+        </ActivityCard>
     )
 }
