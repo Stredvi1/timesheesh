@@ -2,14 +2,14 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {Typography, Box} from "@mui/material";
 import styles from "../styles/Home.module.css";
-import Date from "../formatters/dateTimeFormatter";
-import Currency from "../formatters/currencyFormatter";
+import date from "../formatters/dateTimeFormatter";
+import currency from "../formatters/currencyFormatter";
 
 
-export default function load(props) {
+export default function load() {
     const router = useRouter();
-    // props.id = router.query;
-    console.log(props.id);
+
+    const {id} = router.query;
     const [dataResponse, setDataResponse] = useState([]);
 
     useEffect(() => {
@@ -18,12 +18,12 @@ export default function load(props) {
         }
 
         async function getPageData() {
-            const apiUrlEndpoint = `http://localhost:3000/api/getProjectData-lib`;
+            const apiUrlEndpoint = `/api/getProjectData`;
             const postData = {
-                method: "Post",
+                method: "post",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    id: props.id,
+                    id: id,
                 })
             }
             const response = await fetch(apiUrlEndpoint, postData);
@@ -32,20 +32,22 @@ export default function load(props) {
             setDataResponse(res.projects);
         }
 
-        getPageData();
-    }, [props.id, router.isReady]);
+        console.log("Project ", id);
+
+        getPageData().catch();
+    }, [id, router.isReady]);
     return (
         <>
 
             {dataResponse?.map((project) => {
                     return (
 
-                        <Box className={styles.upperBox} key={props.id}>
+                        <Box className={styles.upperBox} key={project.id}>
 
                             <Typography variant="h3">{project.name}</Typography>
                             <Typography>{project.note}</Typography>
-                            <Typography><strong>Budget: </strong><Currency string={project.budget}/></Typography>
-                            <Typography><strong>Deadline: </strong><Date string={project.deadline}/></Typography>
+                            <Typography><strong>Budget: </strong>{currency(project.budget)}</Typography>
+                            <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
 
 
                         </Box>

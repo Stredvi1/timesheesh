@@ -7,16 +7,15 @@ import {Stack} from '@mui/material';
 
 export default function ProjectDetails() {
 
-    const router = useRouter();
-    const {id} = router.query;
+
 
     return (
         <>
             <div className={styles.wrapper}>
-                <Details id={id}/>
+                <Details/>
 
                 <Stack flexWrap spacing={4} direction="row">
-                    <Activities id={id}/>
+                   <Activities/>
                 </Stack>
             </div>
         </>

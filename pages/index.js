@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import * as m from '@mui/material';
+import {Typography, TextField, Button} from '@mui/material';
 
 export default function Home() {
   return (
@@ -12,12 +12,12 @@ export default function Home() {
 
       <main>
         
-        <m.Typography variant="h1">TimeSheet</m.Typography>
-        <m.TextField id="outlined-basic" label="E-mail" variant="outlined" />
-        <m.TextField id="outlined-basic" label="Password" variant="outlined" />
+        <Typography variant="h1">TimeSheet</Typography>
+        <TextField id="outlined-basic" label="E-mail" variant="outlined" />
+        <TextField id="outlined-basic" label="Password" variant="outlined" />
         
 
-        <m.Button variant="contained" href="#text-buttons">Přihlásit se</m.Button>
+        <Button variant="contained" href="#text-buttons">Přihlásit se</Button>
 
         
     

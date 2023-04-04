@@ -1,4 +1,4 @@
-import db from "./getProjectData-lib"
+import db from "./getProjectData"
 
 
 

@@ -7,7 +7,7 @@ export default function test() {
 
     useEffect(() => {
         async function getPageData() {
-            const apiUrlEndpoint = `http://localhost:3000/api/getProjects-lib`;
+            const apiUrlEndpoint = `/api/getProjects`;
             const response = await fetch(apiUrlEndpoint);
             const res = await response.json();
             console.log(res.projects);

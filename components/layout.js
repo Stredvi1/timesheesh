@@ -2,29 +2,29 @@ import Navbar from './navbar';
 import Footer from './footer';
 import Head from 'next/head';
 
-export default function Layout({ children }) {
+export default function Layout({children}) {
     return (
         <>
 
-        <Head>
-        <title>TimeShift</title>
-        <link rel="icon" href="/favicon.ico" />
-        </Head>
+            <Head>
+                <title>TimeShift</title>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
 
-        <Navbar />
-        <main>{children}</main>    
-        <Footer />
-        
+            <Navbar/>
+            <main>{children}</main>
+            <Footer/>
 
-         <style jsx>{`
-        main {
-          width: 100%;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }`}</style>
+
+            <style jsx>{`
+              main {
+                width: 100%;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+              }`}</style>
         </>
     )
 }

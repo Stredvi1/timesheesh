@@ -1,8 +1,8 @@
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import {Box, Button, Typography} from "@mui/material";
-import Currency from "../formatters/currencyFormatter";
-import Date from "../formatters/dateTimeFormatter";
+
+
 
 
 export default function ActivityCard(props) {

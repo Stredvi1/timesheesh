@@ -2,10 +2,10 @@ import { query } from "./db";
 
 export default async function handler(req, res) {
 
-    const tProjectID = req.body.id;
+    const id = req.body.id;
     try {
-        const querySQL = "SELECT * FROM `projectsdetails` WHERE tProjectID = ?";
-        const valueParams = [tProjectID];
+        const querySQL = "SELECT * FROM `projectsdetails` WHERE id = ?";
+        const valueParams = [id];
 
         const data = await query({query: querySQL, values: valueParams });
 

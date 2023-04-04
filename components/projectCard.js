@@ -1,8 +1,8 @@
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import {Box, Button, Typography} from "@mui/material";
-import Currency from "../formatters/currencyFormatter";
-import Date from "../formatters/dateTimeFormatter";
+import currency from "../formatters/currencyFormatter";
+import date from "../formatters/dateTimeFormatter";
 
 
 export default function ProjectCard(props) {
@@ -19,8 +19,8 @@ export default function ProjectCard(props) {
                 <Typography variant="h4" color="primary">{props.name}</Typography>
             </Box>
 
-            <Typography><strong>Budget: </strong><Currency string={props.budget}/></Typography>
-            <Typography><strong>Deadline: </strong><Date string={props.deadline}/></Typography>
+            <Typography><strong>Budget: </strong>{currency(props.budget)}/></Typography>
+            <Typography><strong>Deadline: </strong>{date(props.deadline)}</Typography>
             <Button variant="contained" href={`/project/${props.id}`}>Detail</Button>
         </ProjectCard>
     )

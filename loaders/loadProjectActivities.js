@@ -5,10 +5,11 @@ import Time from "../formatters/worktimeFormatter";
 
 
 
-export default function load(props) {
+export default function load() {
     const router = useRouter();
-    // props.id = router.query;
-    console.log(props.id);
+    const {id} = router.query;
+
+
     const [dataResponse, setDataResponse] = useState([]);
 
     useEffect(() => {
@@ -17,12 +18,12 @@ export default function load(props) {
         }
 
         async function getPageData() {
-            const apiUrlEndpoint = `http://localhost:3000/api/getActivities-lib`;
+            const apiUrlEndpoint = `/api/getActivities`;
             const postData = {
-                method: "Post",
+                method: "post",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    id: props.id,
+                    id: id,
                 })
             }
             const response = await fetch(apiUrlEndpoint, postData);
@@ -31,8 +32,10 @@ export default function load(props) {
             setDataResponse(res.activities);
         }
 
+        console.log("Activity ", id);
+
         getPageData();
-    }, [props.id, router.isReady]);
+    }, [id, router.isReady]);
     return (
         <>
 

@@ -5,13 +5,11 @@ import styles from "../../styles/Home.module.css";
 
 export default function Activity() {
 
-    const router = useRouter();
-    const {id} = router.query;
 
     return (
         <>
             <div className={styles.wrapper}>
-                <Details id={id}/>
+                <Details/>
             </div>
         </>
     )

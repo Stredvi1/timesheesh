@@ -1,7 +1,6 @@
 import {Form, Formik} from "formik";
 import {RegistrationSchema} from "./registrationSchema";
-import * as m from "@mui/material";
-import React from "react";
+import {Typography, TextField, InputLabel, Select, MenuItem, Button} from "@mui/material";
 
 export default function RegistrationForm() {
 
@@ -23,8 +22,8 @@ export default function RegistrationForm() {
         >
             {({values, handleChange, handleBlur, errors, touched}) => (
                 <Form>
-                    <m.Typography variant="h4">Osobní údaje</m.Typography>
-                    <m.TextField
+                    <Typography variant="h4">Osobní údaje</Typography>
+                    <TextField
                         id="name"
                         label="Jméno"
                         margin="normal"
@@ -35,7 +34,7 @@ export default function RegistrationForm() {
                         error={formik.touched.name && Boolean(formik.errors.name)}
                         helperText={formik.touched.name && formik.errors.name}/>
 
-                    <m.TextField
+                    <TextField
                         id="surname"
                         label="Příjmení"
                         margin="normal"
@@ -48,7 +47,7 @@ export default function RegistrationForm() {
                     />
 
 
-                    <m.TextField
+                    <TextField
                         id="tfBirthNumber"
                         label="Rodné číslo"
                         required
@@ -56,19 +55,19 @@ export default function RegistrationForm() {
                         variant="outlined"
                     />
 
-                    <m.TextField id="outlined-basic" label="Číslo účtu" variant="outlined"/>
-                    <m.TextField id="outlined-basic" label="Kód banky" variant="outlined" inputProps={{maxLength: 4}}
+                    <TextField id="outlined-basic" label="Číslo účtu" variant="outlined"/>
+                    <TextField id="outlined-basic" label="Kód banky" variant="outlined" inputProps={{maxLength: 4}}
                                  type="number"/>
 
-                    <m.Typography variant="h4">Přihlašovací údaje</m.Typography>
-                    <m.TextField
+                    <Typography variant="h4">Přihlašovací údaje</Typography>
+                    <TextField
                         id="outlined-basic"
                         label="Email"
                         required
                         variant="outlined"
                         value={values.email}/>
 
-                    <m.TextField
+                    <TextField
                         id="password"
                         label="Heslo"
                         required
@@ -80,7 +79,7 @@ export default function RegistrationForm() {
                         error={formik.touched.password && Boolean(formik.errors.password)}
                         helperText={formik.touched.password && formik.errors.password}/>
 
-                    <m.TextField
+                    <TextField
                         id="confirmPassword"
                         label="Heslo znovu"
                         required
@@ -91,28 +90,29 @@ export default function RegistrationForm() {
                         error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}/>
 
-                    <m.Typography variant="h4">Úroveň oprávnění</m.Typography>
-                    <m.InputLabel id="permissions-label">Práva</m.InputLabel>
-                    <m.Select
+                    <Typography variant="h4">Úroveň oprávnění</Typography>
+
+                    <InputLabel id="permissions-label">Práva</InputLabel>
+                    <Select
                         labelId="permissions-label"
                         id="new-user-permissions"
-                        value={perrmissionID}
-                        label="Práva"
+                        value={permissionID}
+                        label="Oprávnění"
                     >
-                        <m.MenuItem value={10}>Ten</m.MenuItem>
-                        <m.MenuItem value={20}>Twenty</m.MenuItem>
-                        <m.MenuItem value={30}>Thirty</m.MenuItem>
-                    </m.Select>
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
 
 
-                    <m.Button
+                    <Button
                         variant="text"
                         href="./overview">Zrušit
-                    </m.Button>
-                    <m.Button
+                    </Button>
+                    <Button
                         variant="contained"
                         type="submit">Vytvořit uživatele
-                    </m.Button>
+                    </Button>
 
                 </Form>
             )}
