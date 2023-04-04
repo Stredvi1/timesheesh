@@ -2,22 +2,14 @@
 
 import {useFormik} from "formik";
 import {
-    Stack,
-    Paper,
-    Box,
-    Typography,
-    TextField,
-    InputLabel,
-    Select,
-    MenuItem,
-    Button,
-    FormControl
+    Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button, FormControl
 } from "@mui/material";
 import React from "react";
 import {RegistrationSchema} from "./Form/registrationSchema";
+import UserTypes from "../loaders/loadUserType";
 
 
-export default function MyForm() {
+export default function RegistrationForm() {
 
     const formik = useFormik({
         initialValues: {
@@ -29,15 +21,14 @@ export default function MyForm() {
             email: '',
             password: '',
             confirmPassword: '',
-            permission: ''
-        },
-        validationSchema: RegistrationSchema,
-        onSubmit: (values) => {
+            type: ''
+        }, validationSchema: RegistrationSchema, onSubmit: (values) => {
             console.log(values);
         },
     });
 
-    let permissionID = '';
+    const userTypes = UserTypes();
+
     return (
         <>
 
@@ -92,7 +83,7 @@ export default function MyForm() {
                                     label="Číslo účtu"
                                     variant="outlined"
                                     placeholder={'123456-1234567890'}
-                                    value={formik.values.bankAccount}
+                                    {...formik.getFieldProps('bankAcccount')}
                                     error={formik.touched.bankAccount && Boolean(formik.errors.bankAccount)}
                                     helperText={formik.touched.bankAccount && formik.errors.bankAccount}
                                 />
@@ -103,7 +94,7 @@ export default function MyForm() {
                                     label="Kód banky"
                                     variant="outlined"
                                     type="number"
-                                    value={formik.values.bankCode}
+                                    {...formik.getFieldProps('bankCode')}
                                     error={formik.touched.bankCode && Boolean(formik.errors.bankCode)}
                                     helperText={formik.touched.bankCode && formik.errors.bankCode}/>
                             </Stack>
@@ -119,8 +110,7 @@ export default function MyForm() {
                                     label="Email"
                                     required
                                     variant="outlined"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
+                                    {...formik.getFieldProps('email')}
                                     error={formik.touched.email && Boolean(formik.errors.email)}
                                     helperText={formik.touched.email && formik.errors.email}/>
 
@@ -130,8 +120,7 @@ export default function MyForm() {
                                     required
                                     variant="outlined"
                                     type="password"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.password}
+                                    {...formik.getFieldProps('password')}
                                     error={formik.touched.password && Boolean(formik.errors.password)}
                                     helperText={formik.touched.password && formik.errors.password}/>
 
@@ -141,8 +130,7 @@ export default function MyForm() {
                                     required
                                     variant="outlined"
                                     type="password"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.confirmPassword}
+                                    {...formik.getFieldProps('confirmPassword')}
                                     error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                                     helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}/>
 
@@ -152,24 +140,28 @@ export default function MyForm() {
 
                     <Paper elevation={3}>
                         <Box padding={4}>
-                            <Typography variant="h4">Úroveň oprávnění</Typography>
+                            <Typography variant="h4">Typ uživatele</Typography>
                             <Stack direction="column" spacing={2}>
 
                                 <FormControl fullWidth>
                                     <InputLabel
-                                        id="permissions-label"
-                                    >Práva</InputLabel>
+                                        id="userTypeLabel"
+                                    >Typ</InputLabel>
                                     <Select
-                                        labelId="permissions-label"
-                                        label="Práva"
-                                        id="permission"
-                                        name="permission"
-                                        value={formik.values.permission}
+                                        labelId="userTypeLabel"
+                                        label="Typ"
+                                        id="type"
+                                        value={formik.values.type}
                                         onChange={formik.handleChange}
+                                        {...formik.getFieldProps('type')}
+                                        error={formik.touched.type && Boolean(formik.errors.type)}
                                     >
-                                        <MenuItem id="1" value={"1"}>Ten</MenuItem>
-                                        <MenuItem  id="1" value={"2"}>Twenty</MenuItem>
-                                        <MenuItem   id="1"value={"3"}>Thirty</MenuItem>
+                                        {userTypes.map((types) => {
+                                            return (
+                                                <MenuItem id={types.id} value={types.id} key={types.id}>{types.name}</MenuItem>
+                                            )
+                                        })}
+
                                     </Select>
                                 </FormControl>
 
@@ -188,7 +180,5 @@ export default function MyForm() {
                 </Stack>
             </form>
 
-        </>
-    )
-        ;
+        </>);
 }

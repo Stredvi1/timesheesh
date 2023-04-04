@@ -9,12 +9,14 @@ export default function test() {
         async function getPageData() {
             const apiUrlEndpoint = `/api/getProjects`;
             const response = await fetch(apiUrlEndpoint);
-            const res = await response.json();
-            console.log(res.projects);
-            setdataResponse(res.projects)
+
+            if(response.ok) {
+                const res = await response.json();
+                setdataResponse(res.projects)
+            }
         }
 
-        getPageData();
+        getPageData().catch();
     }, []);
     return (
         <>

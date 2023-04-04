@@ -1,15 +1,14 @@
 import styles from "../styles/Home.module.css";
 
 import React from 'react';
-import MyForm from '../components/MyForm'
-import RegistrationForm from '../components/Form/registrationForm'
+import RegistrationForm from '../components/registrationForm';
 
 
 export default function newUser() {
 
     return (
         <div className={styles.wrapper}>
-            <MyForm/>
+            <RegistrationForm/>
         </div>
     )
 }

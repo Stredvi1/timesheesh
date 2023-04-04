@@ -27,12 +27,12 @@ export default function load() {
                 })
             }
             const response = await fetch(apiUrlEndpoint, postData);
-            const res = await response.json();
 
-            setDataResponse(res.projects);
+            if (response.ok) {
+                const res = await response.json();
+                setDataResponse(res.projects);
+            }
         }
-
-        console.log("Project ", id);
 
         getPageData().catch();
     }, [id, router.isReady]);

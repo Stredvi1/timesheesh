@@ -6,9 +6,10 @@ import currency from "../formatters/currencyFormatter";
 import time from "../formatters/worktimeFormatter";
 
 
-export default function load(props) {
+export default function load() {
     const router = useRouter();
-    console.log(props.id);
+    const {id} = router.query;
+
     const [dataResponse, setDataResponse] = useState([]);
 
     useEffect(() => {
@@ -22,7 +23,7 @@ export default function load(props) {
                 method: "post",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    id: props.id,
+                    id: id,
                 })
             }
             const response = await fetch(apiUrlEndpoint, postData);
@@ -31,10 +32,10 @@ export default function load(props) {
                 const res = await response.json();
                 setDataResponse(res.activity);
             }
-            getPageData().catch();
         }
 
-    }, [props.id, router.isReady]);
+        getPageData().catch();
+    }, [id, router.isReady]);
     return (
         <>
 

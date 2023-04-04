@@ -35,7 +35,7 @@ export const RegistrationSchema = Yup.object().shape({
         .required('Zadejte heslo znovu')
         .oneOf([Yup.ref('password'), null], 'Hesla se neshodují'),
 
-    permission: Yup.string()
+    type: Yup.string()
         .required('Vyberte oprávnění'),
 
 });

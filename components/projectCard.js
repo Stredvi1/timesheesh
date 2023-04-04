@@ -5,7 +5,7 @@ import currency from "../formatters/currencyFormatter";
 import date from "../formatters/dateTimeFormatter";
 
 
-export default function ProjectCard(props) {
+export default function ProjectCard(project) {
     const ProjectCard = styled(Paper)(({ theme }) => ({
         backgroundColor: '#edf4fc',
         ...theme.typography.body1,
@@ -16,12 +16,12 @@ export default function ProjectCard(props) {
     return(
         <ProjectCard>
             <Box>
-                <Typography variant="h4" color="primary">{props.name}</Typography>
+                <Typography variant="h4" color="primary">{project.name}</Typography>
             </Box>
 
-            <Typography><strong>Budget: </strong>{currency(props.budget)}/></Typography>
-            <Typography><strong>Deadline: </strong>{date(props.deadline)}</Typography>
-            <Button variant="contained" href={`/project/${props.id}`}>Detail</Button>
+            <Typography><strong>Budget: </strong>{currency(project.budget)}</Typography>
+            <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
+            <Button variant="contained" href={`/project/${project.id}`}>Detail</Button>
         </ProjectCard>
     )
 }
