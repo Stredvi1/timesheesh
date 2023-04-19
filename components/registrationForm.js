@@ -75,6 +75,7 @@ export default function RegistrationForm() {
                     spacing={6}
                     justifyContent="center"
                     alignItems="center"
+                    margin={4}
                 >
 
                     <Paper elevation={3}>
