@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Card from "../components/activityCard";
-import Time from "../formatters/worktimeFormatter";
+import time from "../formatters/worktimeFormatter";
 
 
 
@@ -47,8 +47,8 @@ export default function load() {
                             id={activity.id}
                             projectID={activity.projectID}
                             name={activity.name}
-                            timefund={<Time string={activity.timefund}/>}
-                            workingTime={<Time string={activity.workingTime}/>}
+                            timefund={activity.timefund}
+                            workingTime={activity.workingTime}
                             fullName={activity.fullName}
                         />
                     )

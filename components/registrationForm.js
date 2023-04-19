@@ -7,7 +7,28 @@ import {
 import React from "react";
 import {RegistrationSchema} from "./Form/registrationSchema";
 import UserTypes from "../loaders/loadUserType";
+import addUser from "../posters/postNewUser";
+import {useRouter} from "next/router";
 
+
+
+async function handleSubmit(values) {
+    const copyValues = Object.assign({}, values)
+
+    if(copyValues.bankAccount === "") {
+        copyValues.bankAccount = null;
+        copyValues.bankCode = null;
+    }
+
+    console.log(copyValues);
+
+    const res = await addUser(copyValues);
+    console.log(res);
+
+    if(res) {
+
+    }
+}
 
 export default function RegistrationForm() {
 
@@ -22,10 +43,27 @@ export default function RegistrationForm() {
             password: '',
             confirmPassword: '',
             type: ''
-        }, validationSchema: RegistrationSchema, onSubmit: (values) => {
-            console.log(values);
+        },
+        validationSchema: RegistrationSchema,
+        onSubmit: async (values) => {
+          await handleSubmit(values);
         },
     });
+
+    let bankCodeState;
+
+    function getBankCodeState() {
+
+        if (formik.values.bankAccount.toString() === "") {
+            formik.values.bankCode = "";
+            bankCodeState = true;
+        } else {
+            bankCodeState = false;
+        }
+    }
+
+
+
 
     const userTypes = UserTypes();
 
@@ -51,8 +89,11 @@ export default function RegistrationForm() {
                                     required
                                     variant="outlined"
                                     {...formik.getFieldProps('name')}
+                                    value={formik.values.name}
                                     error={formik.touched.name && Boolean(formik.errors.name)}
                                     helperText={formik.touched.name && formik.errors.name}/>
+
+                                {/*{...formik.getFieldProps('name')}*/}
 
                                 <TextField
                                     id="surname"
@@ -76,14 +117,14 @@ export default function RegistrationForm() {
                                 />
                             </Stack>
 
-                            {/*todo*/}
                             <Stack direction="row" spacing={2}>
                                 <TextField
                                     id="bankAccount"
                                     label="Číslo účtu"
                                     variant="outlined"
                                     placeholder={'123456-1234567890'}
-                                    {...formik.getFieldProps('bankAcccount')}
+                                    onChange={getBankCodeState()}
+                                    {...formik.getFieldProps('bankAccount')}
                                     error={formik.touched.bankAccount && Boolean(formik.errors.bankAccount)}
                                     helperText={formik.touched.bankAccount && formik.errors.bankAccount}
                                 />
@@ -93,6 +134,7 @@ export default function RegistrationForm() {
                                     id="bankCode"
                                     label="Kód banky"
                                     variant="outlined"
+                                    disabled={bankCodeState}
                                     type="number"
                                     {...formik.getFieldProps('bankCode')}
                                     error={formik.touched.bankCode && Boolean(formik.errors.bankCode)}
@@ -151,7 +193,6 @@ export default function RegistrationForm() {
                                         labelId="userTypeLabel"
                                         label="Typ"
                                         id="type"
-                                        value={formik.values.type}
                                         onChange={formik.handleChange}
                                         {...formik.getFieldProps('type')}
                                         error={formik.touched.type && Boolean(formik.errors.type)}

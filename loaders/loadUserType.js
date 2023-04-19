@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {MenuItem} from "@mui/material";
 
 
 export default function UserTypes() {
@@ -13,7 +12,6 @@ export default function UserTypes() {
             if (response.ok) {
                 const res = await response.json();
                 setdataResponse(res.types)
-                console.log(res)
             }
         }
 

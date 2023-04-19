@@ -20,7 +20,15 @@ export const RegistrationSchema = Yup.object().shape({
         .max(17, 'Číslo účtu je moc dlouhé'),
 
     bankCode: Yup.string()
-        .length(4, 'Neplatná délka'),
+        .when('bankAccount', (bankAccountValue) => {
+            if (bankAccountValue.toString() !== "") {
+                return Yup.string()
+                    .required('Vyplňte i kód banky')
+                    .length(4, 'Neplatná délka')
+            } else {
+                return Yup.string()
+            }
+        }),
 
     email: Yup.string()
         .required('Email je povinný údaj')
