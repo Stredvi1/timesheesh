@@ -63,8 +63,6 @@ export default function RegistrationForm() {
     }
 
 
-
-
     const userTypes = UserTypes();
 
     return (
