@@ -5,7 +5,7 @@ import {
     Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button, FormControl
 } from "@mui/material";
 import React from "react";
-import {RegistrationSchema} from "./Form/registrationSchema";
+import {RegistrationSchema} from "./Schemes/registrationSchema";
 import UserTypes from "../loaders/loadUserType";
 import addUser from "../posters/postNewUser";
 import {useRouter} from "next/router";

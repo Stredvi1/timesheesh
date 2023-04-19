@@ -1,9 +1,7 @@
 "use client"
 import {useFormik} from "formik";
-import {Inter} from '@next/font/google'
-import styles from '../app/page.module.css'
 import {Button, Stack, TextField, MenuItem} from "@mui/material";
-import {ActivityScheme} from "../app/activityScheme";
+import {ActivityScheme} from "./Schemes/activityScheme";
 
 const workers = [
     {

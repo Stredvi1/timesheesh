@@ -1,7 +1,7 @@
 "use client"
 import {useFormik} from "formik";
 import {Button, Stack, TextField} from "@mui/material";
-import {ProjectScheme} from "../app/projectScheme";
+import {ProjectScheme} from "./Schemes/projectScheme";
 
 export default function ProjectForm() {
     const formik = useFormik({
