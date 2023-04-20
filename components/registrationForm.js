@@ -182,30 +182,28 @@ export default function RegistrationForm() {
                     <Paper elevation={3}>
                         <Box padding={4}>
                             <Typography variant="h4">Typ uživatele</Typography>
-                            <Stack direction="column" spacing={2}>
-
-                                <FormControl fullWidth>
-                                    <InputLabel
-                                        id="userTypeLabel"
-                                    >Typ</InputLabel>
-                                    <Select
-                                        labelId="userTypeLabel"
-                                        label="Typ"
-                                        id="type"
-                                        onChange={formik.handleChange}
-                                        {...formik.getFieldProps('type')}
-                                        error={formik.touched.type && Boolean(formik.errors.type)}
-                                    >
-                                        {userTypes.map((types) => {
-                                            return (
-                                                <MenuItem id={types.id} value={types.id} key={types.id}>{types.name}</MenuItem>
-                                            )
-                                        })}
-
-                                    </Select>
-                                </FormControl>
-
-
+                            <Stack direction="column"
+                                   spacing={2}
+                                   padding={2}
+                                   justifyContent="center"
+                                   alignItems="center">
+                                <TextField
+                                    fullWidth
+                                    id="userTypeLabel"
+                                    select
+                                    label="Typ"
+                                    defaultValue=""
+                                    required
+                                    {...formik.getFieldProps('type')}
+                                    error={formik.touched.type && Boolean(formik.errors.type)}
+                                    helperText={formik.touched.type && formik.errors.type}
+                                >
+                                    {userTypes.map((types) => {
+                                        return (
+                                            <MenuItem id={types.id} value={types.id} key={types.id}>{types.name}</MenuItem>
+                                        )
+                                    })}
+                                </TextField>
                                 <Button
                                     variant="text"
                                     href="./overview">Zrušit

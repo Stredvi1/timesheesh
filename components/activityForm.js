@@ -5,6 +5,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import {ActivityScheme} from "./Schemes/activityScheme";
+import Workers from "../loaders/loadWorkers";
 import addActivity from "../posters/postNewActivity";
 
 
@@ -48,6 +49,8 @@ export default function ActivityForm() {
             await handleSubmit(values);
         },
     });
+
+    const workers = Workers();
 
     return (
         <>
@@ -94,11 +97,12 @@ export default function ActivityForm() {
                                         error={formik.touched.worker && Boolean(formik.errors.worker)}
                                         helperText={formik.touched.worker && formik.errors.worker}
                                     >
-                                        {workers.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
+                                        {workers.map((worker) => {
+                                            return (
+                                                <MenuItem id={worker.id} value={worker.id}
+                                                          key={worker.id}>{worker.fullName}</MenuItem>
+                                            )
+                                        })}
                                     </TextField>
                                     <TextField
                                         fullWidth
