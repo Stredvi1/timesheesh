@@ -2,18 +2,32 @@
 
 import {useFormik} from "formik";
 import {
-    Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button, FormControl
+    Stack,
+    Paper,
+    Box,
+    Typography,
+    TextField,
+    InputLabel,
+    Select,
+    MenuItem,
+    Button,
+    FormControl,
+    Alert,
+    IconButton,
+    AlertTitle, Snackbar
 } from "@mui/material";
 import React from "react";
 import {RegistrationSchema} from "./Schemes/registrationSchema";
 import UserTypes from "../loaders/loadUserType";
 import addUser from "../posters/postNewUser";
 import {useRouter} from "next/router";
+import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 
 
 
 export default function RegistrationForm() {
 
+    const [error, setError] = React.useState(false);
     const router = useRouter();
 
     const formik = useFormik({
@@ -47,6 +61,8 @@ export default function RegistrationForm() {
 
         if(res) {
             await router.push("/overview");
+        } else {
+            setError(true);
         }
     }
 
@@ -219,6 +235,32 @@ export default function RegistrationForm() {
                     </Paper>
                 </Stack>
             </form>
+
+            <Snackbar
+                open={error}
+                autoHideDuration={6000}
+            >
+                <Alert
+                    severity="error"
+                    variant="filled"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setError(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    <AlertTitle>Chyba</AlertTitle>
+                    Nastala neočekávaná chyba v databázi
+                </Alert>
+            </Snackbar>
 
         </>);
 }

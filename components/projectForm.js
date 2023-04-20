@@ -1,6 +1,6 @@
 "use client"
 import {useFormik} from "formik";
-import {Button, Stack, TextField, Paper, Box} from "@mui/material";
+import {Button, Stack, TextField, Paper, Box, Alert, AlertTitle, Snackbar, IconButton} from "@mui/material";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {ProjectScheme} from "./Schemes/projectScheme";
@@ -11,10 +11,12 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import dayjs from 'dayjs';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateField} from "@mui/x-date-pickers";
+import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 
 
 export default function ProjectForm() {
 
+    const [error, setError] = React.useState(false);
     const router = useRouter();
 
     const formik = useFormik({
@@ -35,6 +37,8 @@ export default function ProjectForm() {
 
         if (res) {
             await router.push("/overview")
+        } else {
+            setError(true);
         }
     }
 
@@ -110,6 +114,34 @@ export default function ProjectForm() {
                     </Box>
                 </Paper>
             </form>
+
+
+            <Snackbar
+                open={error}
+                autoHideDuration={6000}
+                >
+                <Alert
+                    severity="error"
+                    variant="filled"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setError(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    <AlertTitle>Chyba</AlertTitle>
+                    Nastala neočekávaná chyba v databázi
+                </Alert>
+            </Snackbar>
+
         </>
     )
 }
