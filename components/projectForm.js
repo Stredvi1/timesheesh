@@ -1,32 +1,57 @@
 "use client"
 import {useFormik} from "formik";
-import {Button, Stack, TextField, Paper, Box} from "@mui/material";
+import {Button, Stack, TextField, Paper, Box, Alert, AlertTitle, Snackbar, IconButton} from "@mui/material";
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {ProjectScheme} from "./Schemes/projectScheme";
 import React from "react";
+import addProject from "../posters/postNewProject";
+import {useRouter} from "next/router";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import dayjs from 'dayjs';
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DateField} from "@mui/x-date-pickers";
+import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+
 
 export default function ProjectForm() {
+
+    const [error, setError] = React.useState(false);
+    const router = useRouter();
+
     const formik = useFormik({
         initialValues: {
             projectName: '',
             budget: '',
-            deadline: '',
+            deadline: null,
             description: '',
         },
         validationSchema: ProjectScheme,
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: async (values) => {
+            await handleSubmit(values)
         },
     });
+
+    async function handleSubmit(values) {
+        const res = await addProject(values);
+
+        if (res) {
+            await router.push("/overview")
+        } else {
+            setError(true);
+        }
+    }
 
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
-                <Stack direction="column" spacing={6}
-                       justifyContent="center"
-                       alignItems="center">
+                <Paper elevation={3}>
+                    <Box padding={4}>
+                        <Stack direction="column" spacing={6}
+                               justifyContent="center"
+                               alignItems="center">
 
-                    <Paper elevation={3}>
-                        <Box padding={4}>
+
                             <TextField
                                 id="projectName"
                                 label="Název projektu"
@@ -46,15 +71,24 @@ export default function ProjectForm() {
                                 error={formik.touched.budget && Boolean(formik.errors.budget)}
                                 helperText={formik.touched.budget && formik.errors.budget}/>
 
-                            <TextField
-                                id="deadline"
-                                label="Deadline"
-                                placeholder="rrrr-mm-dd"
-                                required
-                                variant="outlined"
-                                {...formik.getFieldProps('deadline')}
-                                error={formik.touched.deadline && Boolean(formik.errors.deadline)}
-                                helperText={formik.touched.deadline && formik.errors.deadline}/>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateField
+                                    disablePast
+                                    id="deadline"
+                                    label="Deadline"
+                                    required
+                                    variant="outlined"
+                                    format="DD-MM-YYYY"
+                                    onChange={(value) => {
+                                        console.log(dayjs(value).format())
+                                        formik.setFieldValue('deadline', dayjs(value).format("YYYY-MM-DD"));
+                                    }}
+
+                                    error={formik.touched.deadline && Boolean(formik.errors.deadline)}
+                                    helperText={formik.touched.deadline && formik.errors.deadline}
+                                />
+
+                            </LocalizationProvider>
 
                             <TextField
                                 id="description"
@@ -76,10 +110,38 @@ export default function ProjectForm() {
                                 variant="contained"
                             >Vyvořit projekt
                             </Button>
-                        </Box>
-                    </Paper>
-                </Stack>
+                        </Stack>
+                    </Box>
+                </Paper>
             </form>
+
+
+            <Snackbar
+                open={error}
+                autoHideDuration={6000}
+                >
+                <Alert
+                    severity="error"
+                    variant="filled"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setError(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    <AlertTitle>Chyba</AlertTitle>
+                    Nastala neočekávaná chyba v databázi
+                </Alert>
+            </Snackbar>
+
         </>
     )
 }

@@ -1,26 +1,29 @@
 "use client"
 import {useFormik} from "formik";
 import {
-    Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button, FormControl
+    Stack,
+    Paper,
+    Box,
+    Typography,
+    TextField,
+    InputLabel,
+    Select,
+    MenuItem,
+    Button,
+    FormControl,
+    Alert,
+    IconButton,
+    AlertTitle, Snackbar
 } from "@mui/material";
 import React from "react";
 import {ActivityScheme} from "./Schemes/activityScheme";
 import Workers from "../loaders/loadWorkers";
 import addActivity from "../posters/postNewActivity";
+import {useRouter} from "next/router";
+import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 
 
-async function handleSubmit(values) {
-    const copyValues = Object.assign({}, values)
 
-    console.log(copyValues);
-
-    const res = await addActivity(copyValues);
-    console.log(res);
-
-    if(res) {
-
-    }
-}
 
 const workers = [
     {
@@ -34,6 +37,10 @@ const workers = [
 ];
 
 export default function ActivityForm() {
+
+    const [error, setError] = React.useState(false);
+    const router = useRouter();
+
     const formik = useFormik({
         initialValues: {
             activityName: '',
@@ -49,6 +56,18 @@ export default function ActivityForm() {
             await handleSubmit(values);
         },
     });
+
+    async function handleSubmit(values) {
+        const copyValues = Object.assign({}, values)
+
+        const res = await addActivity(copyValues);
+
+        if (res) {
+            await router.push("/overview")
+        } else {
+            setError(true);
+        }
+    }
 
     const workers = Workers();
 
@@ -174,6 +193,32 @@ export default function ActivityForm() {
                     </Paper>
                 </Stack>
             </form>
+
+            <Snackbar
+                open={error}
+                autoHideDuration={6000}
+            >
+                <Alert
+                    severity="error"
+                    variant="filled"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setError(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    <AlertTitle>Chyba</AlertTitle>
+                    Nastala neočekávaná chyba v databázi
+                </Alert>
+            </Snackbar>
         </>
     )
 }

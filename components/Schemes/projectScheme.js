@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import parse from "date-fns/parse"
 
 export const ProjectScheme = Yup.object().shape({
     projectName: Yup.string()
@@ -9,9 +10,9 @@ export const ProjectScheme = Yup.object().shape({
         .required('Budget je povinný údaj')
         .matches(/^\d{1,8}(\.\d{2})?$/, 'Špatný formát budgetu'),
 
-    deadline: Yup.string()
+    deadline: Yup.date()
         .required('Deadline je povinný údaj')
-        .matches(/^\d{4}-\d{2}-\d{2}$/, 'Špatný formát deadlinu'),
+        .typeError("Špatný formát data"),
 
     description: Yup.string()
         .required('Popis je povinný údaj')
