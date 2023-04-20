@@ -18,23 +18,10 @@ import {
 import React from "react";
 import {ActivityScheme} from "./Schemes/activityScheme";
 import Workers from "../loaders/loadWorkers";
+import HourRates from "../loaders/loadHourRates";
 import addActivity from "../posters/postNewActivity";
 import {useRouter} from "next/router";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
-
-
-
-
-const workers = [
-    {
-        value: 'USD',
-        label: '$',
-    },
-    {
-        value: 'EUR',
-        label: '€',
-    },
-];
 
 export default function ActivityForm() {
 
@@ -60,9 +47,9 @@ export default function ActivityForm() {
     async function handleSubmit(values) {
         const copyValues = Object.assign({}, values)
 
-        // const res = await addActivity(copyValues);
+        const res = await addActivity(copyValues);
 
-        if (false) {
+        if (res) {
             await router.push("/overview")
         } else {
             setError(true);
@@ -70,6 +57,7 @@ export default function ActivityForm() {
     }
 
     const workers = Workers();
+    const hourRates = HourRates();
 
     return (
         <>
@@ -134,11 +122,12 @@ export default function ActivityForm() {
                                         error={formik.touched.hourRate && Boolean(formik.errors.hourRate)}
                                         helperText={formik.touched.hourRate && formik.errors.hourRate}
                                     >
-                                        {workers.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
+                                        {hourRates.map((hourRate) => {
+                                            return (
+                                                <MenuItem id={hourRate.id} value={hourRate.id}
+                                                          key={hourRate.id}>{hourRate.amount}</MenuItem>
+                                            )
+                                        })}
                                     </TextField>
                                 </Stack>
                                 <Stack
@@ -210,10 +199,10 @@ export default function ActivityForm() {
                                 setError(false);
                             }}
                         >
-                            <CloseIcon fontSize="inherit" />
+                            <CloseIcon fontSize="inherit"/>
                         </IconButton>
                     }
-                    sx={{ mb: 2 }}
+                    sx={{mb: 2}}
                 >
                     <AlertTitle>Chyba</AlertTitle>
                     Nastala neočekávaná chyba v databázi
