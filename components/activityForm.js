@@ -60,9 +60,9 @@ export default function ActivityForm() {
     async function handleSubmit(values) {
         const copyValues = Object.assign({}, values)
 
-        const res = await addActivity(copyValues);
+        // const res = await addActivity(copyValues);
 
-        if (res) {
+        if (false) {
             await router.push("/overview")
         } else {
             setError(true);
