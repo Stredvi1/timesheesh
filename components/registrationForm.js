@@ -12,25 +12,9 @@ import {useRouter} from "next/router";
 
 
 
-async function handleSubmit(values) {
-    const copyValues = Object.assign({}, values)
-
-    if(copyValues.bankAccount === "") {
-        copyValues.bankAccount = null;
-        copyValues.bankCode = null;
-    }
-
-    console.log(copyValues);
-
-    const res = await addUser(copyValues);
-    console.log(res);
-
-    if(res) {
-
-    }
-}
-
 export default function RegistrationForm() {
+
+    const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
@@ -49,6 +33,22 @@ export default function RegistrationForm() {
           await handleSubmit(values);
         },
     });
+
+    async function handleSubmit(values) {
+        const copyValues = Object.assign({}, values)
+
+        if(copyValues.bankAccount === "") {
+            copyValues.bankAccount = null;
+            copyValues.bankCode = null;
+        }
+
+        const res = await addUser(copyValues);
+        console.log(res);
+
+        if(res) {
+            await router.push("/overview");
+        }
+    }
 
     let bankCodeState;
 
