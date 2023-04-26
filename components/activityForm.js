@@ -22,6 +22,7 @@ import HourRates from "../loaders/loadHourRates";
 import addActivity from "../posters/postNewActivity";
 import {useRouter} from "next/router";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+import Link from "next/link";
 
 export default function ActivityForm() {
 
@@ -160,10 +161,10 @@ export default function ActivityForm() {
                                     error={formik.touched.note && Boolean(formik.errors.note)}
                                     helperText={formik.touched.note && formik.errors.note}
                                 />
-                                <Button
-                                    variant="contained"
-                                    type="submit">Vytvořit aktivitu
-                                </Button>
+                                <Link href="./overview">
+                                    <Button variant="text">Zrušit</Button>
+                                </Link>
+                                <Button variant="contained" type="submit">Vytvořit aktivitu</Button>
                             </Stack>
                         </Box>
                     </Paper>
