@@ -1,19 +1,7 @@
 "use client"
 import {useFormik} from "formik";
 import {
-    Stack,
-    Paper,
-    Box,
-    Typography,
-    TextField,
-    InputLabel,
-    Select,
-    MenuItem,
-    Button,
-    FormControl,
-    Alert,
-    IconButton,
-    AlertTitle, Snackbar
+    Stack, Paper, Box, Typography, TextField, Button
 } from "@mui/material";
 import {RecordScheme} from "./Schemes/recordScheme";
 import React from "react";
@@ -119,12 +107,10 @@ export default function NewRecord() {
                                     rows={4}
                                     {...formik.getFieldProps('description')}
                                     error={formik.touched.description && Boolean(formik.errors.description)}
-                                    helperText={formik.touched.description && formik.errors.description}/>
+                                    helperText={formik.touched.description && formik.errors.description}
+                                />
 
-                                <Button
-                                    variant="contained"
-                                    type="submit">Vytvořit výkaz
-                                </Button>
+                                <Button variant="contained" type="submit">Vytvořit výkaz</Button>
                             </Stack>
                         </Box>
                     </Paper>

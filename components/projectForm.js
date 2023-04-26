@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateField} from "@mui/x-date-pickers";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+import Link from "next/link";
 
 
 export default function ProjectForm() {
@@ -50,8 +51,6 @@ export default function ProjectForm() {
                         <Stack direction="column" spacing={6}
                                justifyContent="center"
                                alignItems="center">
-
-
                             <TextField
                                 id="projectName"
                                 label="Název projektu"
@@ -59,8 +58,8 @@ export default function ProjectForm() {
                                 variant="outlined"
                                 {...formik.getFieldProps('projectName')}
                                 error={formik.touched.projectName && Boolean(formik.errors.projectName)}
-                                helperText={formik.touched.projectName && formik.errors.projectName}/>
-
+                                helperText={formik.touched.projectName && formik.errors.projectName}
+                            />
                             <TextField
                                 id="budget"
                                 label="Rozpočet"
@@ -69,8 +68,8 @@ export default function ProjectForm() {
                                 variant="outlined"
                                 {...formik.getFieldProps('budget')}
                                 error={formik.touched.budget && Boolean(formik.errors.budget)}
-                                helperText={formik.touched.budget && formik.errors.budget}/>
-
+                                helperText={formik.touched.budget && formik.errors.budget}
+                            />
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateField
                                     disablePast
@@ -83,13 +82,10 @@ export default function ProjectForm() {
                                         console.log(dayjs(value).format())
                                         formik.setFieldValue('deadline', dayjs(value).format("YYYY-MM-DD"));
                                     }}
-
                                     error={formik.touched.deadline && Boolean(formik.errors.deadline)}
                                     helperText={formik.touched.deadline && formik.errors.deadline}
                                 />
-
                             </LocalizationProvider>
-
                             <TextField
                                 id="description"
                                 label="Popis"
@@ -99,22 +95,16 @@ export default function ProjectForm() {
                                 rows={6}
                                 {...formik.getFieldProps('description')}
                                 error={formik.touched.description && Boolean(formik.errors.description)}
-                                helperText={formik.touched.description && formik.errors.description}/>
-
-                            <Button
-                                variant="text"
-                                href="./overview">Zrušit
-                            </Button>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                            >Vyvořit projekt
-                            </Button>
+                                helperText={formik.touched.description && formik.errors.description}
+                            />
+                            <Link href="./overview">
+                                <Button variant="text">Zrušit</Button>
+                            </Link>
+                            <Button type="submit" variant="contained">Vyvořit projekt</Button>
                         </Stack>
                     </Box>
                 </Paper>
             </form>
-
 
             <Snackbar
                 open={error}
