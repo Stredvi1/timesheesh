@@ -5,9 +5,9 @@ export const RecordScheme = Yup.object().shape({
         .required('Odpracovaný čas je povinný údaj')
         .matches(/^\d{1,8}(\.\d{2})?$/, 'Špatný formát odpracovaného času'),
 
-    date: Yup.string()
+    date: Yup.date()
         .required('Datum je povinný údaj')
-        .matches(/^\d{4}-\d{2}-\d{2}$/, 'Špatný formát datumu'),
+        .typeError("Špatný formát data"),
 
     description: Yup.string()
         .required('Popis je povinný údaj')

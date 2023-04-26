@@ -1,12 +1,37 @@
 "use client"
 import {useFormik} from "formik";
 import {
-    Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button, FormControl
+    Stack,
+    Paper,
+    Box,
+    Typography,
+    TextField,
+    InputLabel,
+    Select,
+    MenuItem,
+    Button,
+    FormControl,
+    Alert,
+    IconButton,
+    AlertTitle, Snackbar
 } from "@mui/material";
 import {RecordScheme} from "./Schemes/recordScheme";
 import React from "react";
+import {useRouter} from "next/router";
+import addRecord from "../posters/postNewRecord";
+import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DateField} from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 
-export default function NewProject() {
+
+export default function NewRecord() {
+
+    const [error, setError] = React.useState(false);
+    const router = useRouter();
+    const {id} = router.query;
+
     const formik = useFormik({
         initialValues: {
             workingTime: '',
@@ -14,10 +39,23 @@ export default function NewProject() {
             description: '',
         },
         validationSchema: RecordScheme,
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: async (values) => {
+            await handleSubmit(values)
         },
     });
+
+    async function handleSubmit(values) {
+
+        values["id"] = id;
+        console.log(values)
+        const res = await addRecord(values);
+
+        if (res) {
+            await router.back()
+        } else {
+            setError(true);
+        }
+    }
 
     return (
         <>
@@ -42,6 +80,7 @@ export default function NewProject() {
                                 }}
                             >
                                 <Typography variant="h4">Vytvoření výkazu</Typography>
+
                                 <TextField
                                     fullWidth
                                     id="workingTime"
@@ -52,16 +91,24 @@ export default function NewProject() {
                                     {...formik.getFieldProps('workingTime')}
                                     error={formik.touched.workingTime && Boolean(formik.errors.workingTime)}
                                     helperText={formik.touched.workingTime && formik.errors.workingTime}/>
-                                <TextField
-                                    fullWidth
-                                    id="date"
-                                    label="Datum"
-                                    placeholder="rrrr-mm-dd"
-                                    required
-                                    variant="outlined"
-                                    {...formik.getFieldProps('date')}
-                                    error={formik.touched.date && Boolean(formik.errors.date)}
-                                    helperText={formik.touched.date && formik.errors.date}/>
+
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DateField
+                                        fullWidth
+                                        disablePast
+                                        id="date"
+                                        label="Datum"
+                                        required
+                                        variant="outlined"
+                                        format="DD-MM-YYYY"
+                                        onChange={(value) => {
+                                            formik.setFieldValue('date', dayjs(value).format("YYYY-MM-DD hh:mm:ss"));
+                                        }}
+                                        error={formik.touched.date && Boolean(formik.errors.date)}
+                                        helperText={formik.touched.date && formik.errors.date}
+                                    />
+                                </LocalizationProvider>
+
                                 <TextField
                                     fullWidth
                                     id="description"
@@ -73,6 +120,7 @@ export default function NewProject() {
                                     {...formik.getFieldProps('description')}
                                     error={formik.touched.description && Boolean(formik.errors.description)}
                                     helperText={formik.touched.description && formik.errors.description}/>
+
                                 <Button
                                     variant="contained"
                                     type="submit">Vytvořit výkaz
@@ -82,6 +130,32 @@ export default function NewProject() {
                     </Paper>
                 </Stack>
             </form>
+
+            <Snackbar
+                open={error}
+                autoHideDuration={6000}
+            >
+                <Alert
+                    severity="error"
+                    variant="filled"
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setError(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2 }}
+                >
+                    <AlertTitle>Chyba</AlertTitle>
+                    Nastala neočekávaná chyba v databázi
+                </Alert>
+            </Snackbar>
         </>
     )
 }
