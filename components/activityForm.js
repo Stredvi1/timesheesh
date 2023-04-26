@@ -72,11 +72,12 @@ export default function ActivityForm() {
                         <Box padding={4}>
                             <Stack
                                 direction="column"
-                                spacing={6}
+                                spacing={2}
                                 justifyContent="center"
                                 alignItems="center">
                                 <Typography variant="h4">Vytvoření aktivity</Typography>
                                 <TextField
+                                    fullWidth
                                     id="activityName"
                                     label="Název aktivity"
                                     required
@@ -85,14 +86,7 @@ export default function ActivityForm() {
                                     error={formik.touched.activityName && Boolean(formik.errors.activityName)}
                                     helperText={formik.touched.activityName && formik.errors.activityName}
                                 />
-                                <Stack
-                                    direction="row"
-                                    spacing={2}
-                                    sx={{
-                                        width: 500,
-                                        maxWidth: '100%',
-                                    }}
-                                >
+                                <Stack direction="row" spacing={2} sx={{width: 500, maxWidth: '100%',}}>
                                     <TextField
                                         fullWidth
                                         id="worker"
@@ -130,14 +124,7 @@ export default function ActivityForm() {
                                         })}
                                     </TextField>
                                 </Stack>
-                                <Stack
-                                    direction="row"
-                                    spacing={2}
-                                    sx={{
-                                        width: 500,
-                                        maxWidth: '100%',
-                                    }}
-                                >
+                                <Stack direction="row" spacing={2} sx={{width: 500, maxWidth: '100%',}}>
                                     <TextField
                                         fullWidth
                                         id="timeFund"

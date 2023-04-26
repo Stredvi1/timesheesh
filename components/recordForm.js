@@ -1,7 +1,7 @@
 "use client"
 import {useFormik} from "formik";
 import {
-    Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button, FormControl
+    Stack, Paper, Box, Typography, TextField, Button
 } from "@mui/material";
 import {RecordScheme} from "./Schemes/recordScheme";
 import React from "react";
@@ -51,7 +51,8 @@ export default function NewProject() {
                                     variant="outlined"
                                     {...formik.getFieldProps('workingTime')}
                                     error={formik.touched.workingTime && Boolean(formik.errors.workingTime)}
-                                    helperText={formik.touched.workingTime && formik.errors.workingTime}/>
+                                    helperText={formik.touched.workingTime && formik.errors.workingTime}
+                                />
                                 <TextField
                                     fullWidth
                                     id="date"
@@ -72,11 +73,9 @@ export default function NewProject() {
                                     rows={4}
                                     {...formik.getFieldProps('description')}
                                     error={formik.touched.description && Boolean(formik.errors.description)}
-                                    helperText={formik.touched.description && formik.errors.description}/>
-                                <Button
-                                    variant="contained"
-                                    type="submit">Vytvořit výkaz
-                                </Button>
+                                    helperText={formik.touched.description && formik.errors.description}
+                                />
+                                <Button variant="contained" type="submit">Vytvořit výkaz</Button>
                             </Stack>
                         </Box>
                     </Paper>
