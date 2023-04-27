@@ -11,17 +11,18 @@ export default function ActivityCard(activity) {
         ...theme.typography.body1,
         padding: theme.spacing(4),
         color: theme.palette.text.contrastText,
+        width: '20%',
     }));
 
     return (
         <ActivityCard>
-            <Box>
-                <Typography variant="h4" color="primary">{activity.name}</Typography>
+            <Typography variant="h4" color="primary">{activity.name}</Typography>
+            <Box sx={{pb: 2, pt: 1}}>
+                <Typography><strong>Přiřazeno: </strong>{activity.fullName}</Typography>
+                <Typography><strong>Časofond: </strong>{time(activity.timefund)}</Typography>
+                <Typography><strong>Odpracováno: </strong>{time(activity.workingTime)}</Typography>
             </Box>
 
-            <Typography><strong>Přiřazeno: </strong>{activity.fullName}</Typography>
-            <Typography><strong>Časofond: </strong>{time(activity.timefund)}</Typography>
-            <Typography><strong>Odpracováno: </strong>{time(activity.workingTime)}</Typography>
             <Link href="./overview">
                 <Button variant="contained">Detail</Button>
             </Link>

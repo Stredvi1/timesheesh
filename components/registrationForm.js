@@ -86,115 +86,120 @@ export default function RegistrationForm() {
 
             <form onSubmit={formik.handleSubmit}>
                 <Stack direction="column" spacing={2} padding={2} alignItems="center">
-                    <Stack direction="row" spacing={6} justifyContent="center" margin={4}>
-                        <Paper elevation={3}>
-                            <Box padding={4} alignItems="center" justifyContent='center'>
+                    <Stack direction="row" spacing={6} justifyContent="center" margin={4} sx={{width: '35%'}}>
+                        <Paper elevation={3} sx={{width: '100%'}}>
+                            <Stack direction="column" spacing={2} padding={2} margin={4} alignItems="center">
                                 <Typography variant="h4">Osobní údaje</Typography>
-                                <Stack direction="column" spacing={2} padding={2} alignItems="center">
-                                    <TextField
-                                        id="name"
-                                        label="Jméno"
-                                        required
-                                        variant="outlined"
-                                        {...formik.getFieldProps('name')}
-                                        value={formik.values.name}
-                                        error={formik.touched.name && Boolean(formik.errors.name)}
-                                        helperText={formik.touched.name && formik.errors.name}
-                                    />
-                                    {/*{...formik.getFieldProps('name')}*/}
-                                    <TextField
-                                        id="surname"
-                                        label="Příjmení"
-                                        required
-                                        variant="outlined"
-                                        {...formik.getFieldProps('surname')}
-                                        error={formik.touched.surname && Boolean(formik.errors.surname)}
-                                        helperText={formik.touched.surname && formik.errors.surname}
-                                    />
-                                    <TextField
-                                        id="birthNumber"
-                                        label="Rodné číslo"
-                                        required
-                                        placeholder={'rrmmdd/xxxx'}
-                                        variant="outlined"
-                                        {...formik.getFieldProps('birthNumber')}
-                                        error={formik.touched.birthNumber && Boolean(formik.errors.birthNumber)}
-                                        helperText={formik.touched.birthNumber && formik.errors.birthNumber}
-                                    />
-                                    <TextField
-                                        id="bankAccount"
-                                        label="Číslo účtu"
-                                        variant="outlined"
-                                        placeholder={'123456-1234567890'}
-                                        onChange={getBankCodeState()}
-                                        {...formik.getFieldProps('bankAccount')}
-                                        error={formik.touched.bankAccount && Boolean(formik.errors.bankAccount)}
-                                        helperText={formik.touched.bankAccount && formik.errors.bankAccount}
-                                    />
-                                    <TextField
-                                        id="bankCode"
-                                        label="Kód banky"
-                                        variant="outlined"
-                                        disabled={bankCodeState}
-                                        type="number"
-                                        {...formik.getFieldProps('bankCode')}
-                                        error={formik.touched.bankCode && Boolean(formik.errors.bankCode)}
-                                        helperText={formik.touched.bankCode && formik.errors.bankCode}/>
-                                </Stack>
-                            </Box>
+                                <TextField
+                                    fullWidth
+                                    id="name"
+                                    label="Jméno"
+                                    required
+                                    variant="outlined"
+                                    {...formik.getFieldProps('name')}
+                                    value={formik.values.name}
+                                    error={formik.touched.name && Boolean(formik.errors.name)}
+                                    helperText={formik.touched.name && formik.errors.name}
+                                />
+                                {/*{...formik.getFieldProps('name')}*/}
+                                <TextField
+                                    fullWidth
+                                    id="surname"
+                                    label="Příjmení"
+                                    required
+                                    variant="outlined"
+                                    {...formik.getFieldProps('surname')}
+                                    error={formik.touched.surname && Boolean(formik.errors.surname)}
+                                    helperText={formik.touched.surname && formik.errors.surname}
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="birthNumber"
+                                    label="Rodné číslo"
+                                    required
+                                    placeholder={'rrmmdd/xxxx'}
+                                    variant="outlined"
+                                    {...formik.getFieldProps('birthNumber')}
+                                    error={formik.touched.birthNumber && Boolean(formik.errors.birthNumber)}
+                                    helperText={formik.touched.birthNumber && formik.errors.birthNumber}
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="bankAccount"
+                                    label="Číslo účtu"
+                                    variant="outlined"
+                                    placeholder={'123456-1234567890'}
+                                    onChange={getBankCodeState()}
+                                    {...formik.getFieldProps('bankAccount')}
+                                    error={formik.touched.bankAccount && Boolean(formik.errors.bankAccount)}
+                                    helperText={formik.touched.bankAccount && formik.errors.bankAccount}
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="bankCode"
+                                    label="Kód banky"
+                                    variant="outlined"
+                                    disabled={bankCodeState}
+                                    type="number"
+                                    {...formik.getFieldProps('bankCode')}
+                                    error={formik.touched.bankCode && Boolean(formik.errors.bankCode)}
+                                    helperText={formik.touched.bankCode && formik.errors.bankCode}/>
+                            </Stack>
                         </Paper>
-                        <Paper elevation={3}>
-                            <Box padding={4} alignItems="center">
+                        <Paper elevation={3} sx={{width: '100%'}}>
+                            <Stack direction="column" spacing={2} padding={2} margin={4} alignItems="center">
                                 <Typography variant="h4">Přihlašovací údaje</Typography>
-                                <Stack direction="column" spacing={2} padding={2}>
-                                    <TextField
-                                        id="email"
-                                        label="Email"
-                                        required
-                                        variant="outlined"
-                                        {...formik.getFieldProps('email')}
-                                        error={formik.touched.email && Boolean(formik.errors.email)}
-                                        helperText={formik.touched.email && formik.errors.email}
-                                    />
-                                    <TextField
-                                        id="password"
-                                        label="Heslo"
-                                        required
-                                        variant="outlined"
-                                        type="password"
-                                        {...formik.getFieldProps('password')}
-                                        error={formik.touched.password && Boolean(formik.errors.password)}
-                                        helperText={formik.touched.password && formik.errors.password}
-                                    />
-                                    <TextField
-                                        id="confirmPassword"
-                                        label="Heslo znovu"
-                                        required
-                                        variant="outlined"
-                                        type="password"
-                                        {...formik.getFieldProps('confirmPassword')}
-                                        error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                                        helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-                                    />
-                                    <TextField
-                                        fullWidth
-                                        select
-                                        label="Typ"
-                                        defaultValue=""
-                                        required
-                                        {...formik.getFieldProps('type')}
-                                        error={formik.touched.type && Boolean(formik.errors.type)}
-                                        helperText={formik.touched.type && formik.errors.type}
-                                    >
-                                        {userTypes.map((types) => {
-                                            return (
-                                                <MenuItem id={types.id} value={types.id}
-                                                          key={types.id}>{types.name}</MenuItem>
-                                            )
-                                        })}
-                                    </TextField>
-                                </Stack>
-                            </Box>
+
+                                <TextField
+                                    fullWidth
+                                    id="email"
+                                    label="Email"
+                                    required
+                                    variant="outlined"
+                                    {...formik.getFieldProps('email')}
+                                    error={formik.touched.email && Boolean(formik.errors.email)}
+                                    helperText={formik.touched.email && formik.errors.email}
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="password"
+                                    label="Heslo"
+                                    required
+                                    variant="outlined"
+                                    type="password"
+                                    {...formik.getFieldProps('password')}
+                                    error={formik.touched.password && Boolean(formik.errors.password)}
+                                    helperText={formik.touched.password && formik.errors.password}
+                                />
+                                <TextField
+                                    fullWidth
+                                    id="confirmPassword"
+                                    label="Heslo znovu"
+                                    required
+                                    variant="outlined"
+                                    type="password"
+                                    {...formik.getFieldProps('confirmPassword')}
+                                    error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                                    helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                                />
+                                <TextField
+                                    fullWidth
+                                    select
+                                    label="Typ"
+                                    defaultValue=""
+                                    required
+                                    {...formik.getFieldProps('type')}
+                                    error={formik.touched.type && Boolean(formik.errors.type)}
+                                    helperText={formik.touched.type && formik.errors.type}
+                                >
+                                    {userTypes.map((types) => {
+                                        return (
+                                            <MenuItem id={types.id} value={types.id}
+                                                      key={types.id}>{types.name}</MenuItem>
+                                        )
+                                    })}
+                                </TextField>
+                            </Stack>
                         </Paper>
                     </Stack>
                     <Stack direction="column" spacing={2} padding={2} alignItems="center">

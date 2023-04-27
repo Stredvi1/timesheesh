@@ -38,7 +38,6 @@ export default function load() {
     }, [id, router.isReady]);
     return (
         <>
-
             {dataResponse?.map((activity) => {
                     return (
 

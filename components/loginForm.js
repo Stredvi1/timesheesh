@@ -3,41 +3,40 @@
 import {useFormik} from "formik";
 import {Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, Button, FormControl, Alert, IconButton, AlertTitle, Snackbar} from "@mui/material";
 import React from "react";
-import {RegistrationSchema} from "./Schemes/registrationSchema";
-import addUser from "../posters/postNewUser";
 import {useRouter} from "next/router";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 import {LoginScheme} from "./Schemes/loginScheme";
+import {signIn} from "next-auth/react";
 
+
+const initialValues = {
+    email: "",
+    password: ""
+};
 
 export default function LoginForm() {
+    const submitForm = async ({email, password}, bag) => {
+        bag.resetForm(initialValues);
+        bag.setFieldValue('login', email);
+
+        const {ok, status} = await signIn("credentials", {email, password, redirect: false});
+
+        if (ok) {
+            router.push("/overview");
+        } else {
+            errorP.current.innerText = "Login nebo heslo nesprávné!";
+            //todo errors with status
+        }
+    };
 
     const [error, setError] = React.useState(false);
     const router = useRouter();
 
     const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: '',
-        },
+        initialValues,
         validationSchema: LoginScheme,
-        onSubmit: async (values) => {
-            await handleSubmit(values);
-        },
+        onSubmit: submitForm,
     });
-
-    async function handleSubmit(values) {
-        const copyValues = Object.assign({}, values)
-
-        const res = await addUser(copyValues);
-        console.log(res);
-
-        if (res) {
-            await router.push("/overview");
-        } else {
-            setError(true);
-        }
-    }
 
     return (
         <>

@@ -67,8 +67,7 @@ export default function ActivityForm() {
                        spacing={6}
                        justifyContent="center"
                        alignItems="center"
-                       margin={4}
-                >
+                       margin={4}>
                     <Paper elevation={3}>
                         <Box padding={4}>
                             <Stack
@@ -125,7 +124,7 @@ export default function ActivityForm() {
                                         })}
                                     </TextField>
                                 </Stack>
-                                <Stack direction="row" spacing={2} sx={{width: 500, maxWidth: '100%',}}>
+                                <Stack direction="row" spacing={2} sx={{width: '100%'}}>
                                     <TextField
                                         fullWidth
                                         id="timeFund"
@@ -161,13 +160,15 @@ export default function ActivityForm() {
                                     error={formik.touched.note && Boolean(formik.errors.note)}
                                     helperText={formik.touched.note && formik.errors.note}
                                 />
-                                <Link href="./overview">
-                                    <Button variant="text">Zrušit</Button>
-                                </Link>
-                                <Button variant="contained" type="submit">Vytvořit aktivitu</Button>
                             </Stack>
                         </Box>
                     </Paper>
+                </Stack>
+                <Stack direction="column" spacing={2} padding={2} alignItems="center">
+                    <Link href="./overview">
+                        <Button variant="text">Zrušit</Button>
+                    </Link>
+                    <Button variant="contained" type="submit">Vytvořit aktivitu</Button>
                 </Stack>
             </form>
 

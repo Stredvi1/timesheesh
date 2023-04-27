@@ -49,7 +49,7 @@ export default function ProjectForm() {
                     justifyContent="center"
                     alignItems="center"
                     margin={4}>
-                    <Paper elevation={3}>
+                    <Paper elevation={3} sx={{width: 500}}>
                         <Box padding={4}>
                             <Stack direction="column"
                                    spacing={2}
@@ -106,14 +106,17 @@ export default function ProjectForm() {
                                     error={formik.touched.description && Boolean(formik.errors.description)}
                                     helperText={formik.touched.description && formik.errors.description}
                                 />
-                                <Link href="./overview">
-                                    <Button variant="text">Zrušit</Button>
-                                </Link>
-                                <Button type="submit" variant="contained">Vyvořit projekt</Button>
                             </Stack>
                         </Box>
                     </Paper>
                 </Stack>
+                <Stack direction="column" spacing={2} padding={2} alignItems="center">
+                    <Link href="./overview">
+                        <Button variant="text">Zrušit</Button>
+                    </Link>
+                    <Button type="submit" variant="contained">Vyvořit projekt</Button>
+                </Stack>
+
             </form>
 
             <Snackbar

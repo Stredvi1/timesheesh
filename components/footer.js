@@ -19,11 +19,13 @@ export default function Footer() {
 
         footer {
           width: 100%;
-          height: 4rem;
-          border-top: 1px solid #eaeaea;
+          height: 6rem;
+          border-top: 2px solid #eaeaea;
           display: flex;
           justify-content: center;
           align-items: center;
+          position: fixed;
+          bottom: 0;
         }
       `}</style>
     </>

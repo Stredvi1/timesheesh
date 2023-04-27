@@ -38,6 +38,11 @@ export default function Layout({children}) {
               * {
                 box-sizing: border-box;
               }
+
+              a {
+                text-decoration: none;
+                color: white;
+              }
             `}</style>
         </>
     )

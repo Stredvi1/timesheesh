@@ -20,10 +20,8 @@ export default function Overview() {
                     <Typography variant="h3">Vítejte, %Jan Novák%</Typography>
                 </Box>
 
-                <Stack flexWrap spacing={4} direction="row">
-
+                <Stack flexWrap spacing={4} sx={{ p: 6 }} direction="row">
                     <Projects/>
-
                 </Stack>
             </div>
         </>
