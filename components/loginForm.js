@@ -25,7 +25,6 @@ export default function LoginForm() {
             router.push("/overview");
         } else {
             errorP.current.innerText = "Login nebo heslo nesprávné!";
-            //todo errors with status
         }
     };
 
@@ -41,10 +40,19 @@ export default function LoginForm() {
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
-                <Stack direction="column" spacing={2} padding={2} alignItems="center">
-                    <Box padding={4} alignItems="center">
+                <Stack direction="column"
+                       spacing={2}
+                       padding={2}
+                       alignItems="center"
+                       justifyContent="center"
+                       sx={{mt: '10%'}}>
+                    <Box padding={4}
+                         alignItems="center">
                         <Typography variant="h1">TimeSheet</Typography>
-                        <Stack direction="column" spacing={2} padding={2}>
+                        <Stack
+                            direction="column"
+                            spacing={2}
+                            padding={2}>
                             <TextField
                                 id="email"
                                 label="Email"

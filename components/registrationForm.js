@@ -149,7 +149,6 @@ export default function RegistrationForm() {
                         <Paper elevation={3} sx={{width: '100%'}}>
                             <Stack direction="column" spacing={2} padding={2} margin={4} alignItems="center">
                                 <Typography variant="h4">Přihlašovací údaje</Typography>
-
                                 <TextField
                                     fullWidth
                                     id="email"
