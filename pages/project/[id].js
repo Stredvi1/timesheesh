@@ -11,9 +11,8 @@ export default function ProjectDetails() {
             <div className={styles.wrapper}>
                 <Details/>
 
-                <Stack flexWrap spacing={4} sx={{ p: 6 }} direction="row">
+
                    <Activities/>
-                </Stack>
 
                 <AddActivity url={"/newActivity"} name={"Aktivitu"}/>
 

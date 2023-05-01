@@ -111,9 +111,9 @@ export default function ProjectForm() {
                     </Paper>
                 </Stack>
                 <Stack direction="column" spacing={2} padding={2} alignItems="center">
-                    <Link href="./overview">
-                        <Button variant="text">Zrušit</Button>
-                    </Link>
+
+                        <Button variant="text" onClick={router.back}>Zrušit</Button>
+
                     <Button type="submit" variant="contained">Vyvořit projekt</Button>
                 </Stack>
 
