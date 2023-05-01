@@ -13,6 +13,7 @@ export default function Activity() {
                 <Details/>
             </div>
 
+
             <AddRecord/>
 
         </>
