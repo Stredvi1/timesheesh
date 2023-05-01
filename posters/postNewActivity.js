@@ -1,10 +1,6 @@
-import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
 
+export default async function addActivity(props) {
 
-export default async function addUser(props) {
-
-    const router = useRouter();
     const apiUrlEndpoint = `/api/addActivity`;
 
     const postData = {
@@ -13,7 +9,7 @@ export default async function addUser(props) {
         body: JSON.stringify({
             activityName: props.activityName,
             timeFund: props.timeFund,
-            userID: props.userID,
+            userID: props.worker,
             hourRate: props.hourRate,
             projectID: props.projectID,
             note: props.note
@@ -23,7 +19,6 @@ export default async function addUser(props) {
     console.log(response);
 
     if (response.ok) {
-        router.replace("/overview");
         return true;
     }
 }

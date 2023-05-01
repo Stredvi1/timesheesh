@@ -34,7 +34,7 @@ export default function NewRecord() {
 
     async function handleSubmit(values) {
 
-        values["id"] = id;
+        values.id = id;
         console.log(values)
         const res = await addRecord(values);
 
@@ -83,7 +83,6 @@ export default function NewRecord() {
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DateField
                                         fullWidth
-                                        disablePast
                                         id="date"
                                         label="Datum"
                                         required

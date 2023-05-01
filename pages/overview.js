@@ -29,7 +29,7 @@ export default function Overview() {
                     </div>
                 </div>
 
-                <AddProject url={"/newProject"} name={"Projekt"}/>
+                <AddProject url={"/newProject"} name={"Projekt"} useId={false}/>
             </div>
         </>
     )

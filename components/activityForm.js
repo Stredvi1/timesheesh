@@ -6,11 +6,8 @@ import {
     Box,
     Typography,
     TextField,
-    InputLabel,
-    Select,
     MenuItem,
     Button,
-    FormControl,
     Alert,
     IconButton,
     AlertTitle, Snackbar
@@ -22,7 +19,8 @@ import HourRates from "../loaders/loadHourRates";
 import addActivity from "../posters/postNewActivity";
 import {useRouter} from "next/router";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
-import Link from "next/link";
+import {useSearchParams} from "next/navigation";
+
 
 export default function ActivityForm() {
 
@@ -32,10 +30,9 @@ export default function ActivityForm() {
     const formik = useFormik({
         initialValues: {
             activityName: '',
+            timeFund: '',
             worker: '',
             hourRate: '',
-            timeFund: '',
-            deadline: '',
             note: '',
 
         },
@@ -46,12 +43,15 @@ export default function ActivityForm() {
     });
 
     async function handleSubmit(values) {
-        const copyValues = Object.assign({}, values)
+        const {id} = router.query;
+        values.projectID = parseInt(id);
+        values.timeFund = parseFloat(values.timeFund);
+        console.log(values)
 
-        const res = await addActivity(copyValues);
+        const res = await addActivity(values);
 
         if (res) {
-            await router.push("/overview")
+            await router.back();
         } else {
             setError(true);
         }
@@ -100,8 +100,10 @@ export default function ActivityForm() {
                                     >
                                         {workers.map((worker) => {
                                             return (
-                                                <MenuItem id={worker.id} value={worker.id}
-                                                          key={worker.id}>{worker.fullName}</MenuItem>
+                                                <MenuItem id={worker.id}
+                                                          key={worker.id}
+                                                          value={worker.id}
+                                                >{worker.fullName}</MenuItem>
                                             )
                                         })}
                                     </TextField>
@@ -136,17 +138,6 @@ export default function ActivityForm() {
                                         error={formik.touched.timeFund && Boolean(formik.errors.timeFund)}
                                         helperText={formik.touched.timeFund && formik.errors.timeFund}
                                     />
-                                    <TextField
-                                        fullWidth
-                                        id="deadline"
-                                        label="Deadline"
-                                        placeholder="rrrr-mm-dd"
-                                        required
-                                        variant="outlined"
-                                        {...formik.getFieldProps('deadline')}
-                                        error={formik.touched.deadline && Boolean(formik.errors.deadline)}
-                                        helperText={formik.touched.deadline && formik.errors.deadline}
-                                    />
                                 </Stack>
                                 <TextField
                                     fullWidth
@@ -165,8 +156,8 @@ export default function ActivityForm() {
                     </Paper>
                 </Stack>
                 <Stack direction="column" spacing={2} padding={2} alignItems="center">
-                        <Button variant="text" onClick={router.back}>Zrušit</Button>
-                    <Button variant="contained" type="submit">Vytvořit aktivitu</Button>
+                    <Button variant="text" onClick={router.back}>Zrušit</Button>
+                    <Button variant="contained" type="submit" >Vytvořit aktivitu</Button>
                 </Stack>
             </form>
 

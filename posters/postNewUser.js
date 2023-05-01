@@ -1,10 +1,8 @@
-import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 
 
 export default async function addUser(props) {
 
-    const router = useRouter();
     const apiUrlEndpoint = `/api/addUser`;
 
     const postData = {
@@ -25,7 +23,6 @@ export default async function addUser(props) {
     console.log(response);
 
     if (response.ok) {
-        router.replace("/overview");
         return true;
     }
 }

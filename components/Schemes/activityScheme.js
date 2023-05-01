@@ -13,13 +13,9 @@ export const ActivityScheme = Yup.object().shape({
         .required('Pracovník je povinný údaj'),
 
     hourRate: Yup.string()
-        .required('Budget je povinný údaj'),
+        .required('Hodinová sazba je povinný údaj'),
 
-    deadline: Yup.string()
-        .required('Deadline je povinný údaj')
-        .matches(/^\d{4}-\d{2}-\d{2}$/, 'Špatný formát deadlinu'),
-
-    description: Yup.string()
+    note: Yup.string()
         .required('Popis je povinný údaj')
         .max(400, 'Popis je moc dlouhý'),
 

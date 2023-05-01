@@ -14,7 +14,7 @@ export default function ProjectDetails() {
 
                    <Activities/>
 
-                <AddActivity url={"/newActivity"} name={"Aktivitu"}/>
+                <AddActivity url={"/newActivity"} name={"Aktivitu"} useId={true}/>
 
             </div>
         </>
