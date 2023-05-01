@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import {LoupeOutlined, HomeOutlined} from '@mui/icons-material/';
+import {LoupeOutlined, HomeOutlined, ArrowBack} from '@mui/icons-material/';
 import Link from "next/link";
 import {useSession} from "next-auth/react";
 import {IconButton, Stack} from "@mui/material";
@@ -21,13 +21,17 @@ export default function ButtonAppBar() {
         }
     }
 
+    function back() {
+        router.back();
+    }
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
                     <Stack
                         direction="row"
-                        spacing={4}
+                        spacing={2}
                         component="div" sx={{flexGrow: 1}}
                         alignItems="center">
                         <Box
@@ -37,6 +41,17 @@ export default function ButtonAppBar() {
                                 TimeShift
                             </Typography>
                         </Box>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{mr: 2}}
+                            onClick={() => {
+                                back();
+                            }}>
+                            <ArrowBack/>
+                        </IconButton>
                         <IconButton
                             size="large"
                             edge="start"
