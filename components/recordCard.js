@@ -11,13 +11,14 @@ export default function RecordCard(record) {
         ...theme.typography.body1,
         padding: theme.spacing(4),
         color: theme.palette.text.contrastText,
-        width: '20%',
+        width: 'fit-content',
+        height: 'fit-content',
     }));
 
     return (
         <RecordCard>
-            <Typography><strong>Working time: </strong>{record.workingTime}</Typography>
             <Typography><strong>Deadline: </strong>{date(record.date)}</Typography>
+            <Typography><strong>Working time: </strong>{record.workingTime}</Typography>
             <Typography><strong>Text: </strong>{record.text}</Typography>
         </RecordCard>
     )
