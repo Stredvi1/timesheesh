@@ -1,10 +1,8 @@
-import Head from 'next/head';
+
 import styles from '../styles/Home.module.css';
 import {Typography, Box, Stack} from '@mui/material';
 
 
-import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
 import Projects from "../loaders/loadProjects";
 import AddProject from "../components/addButton";
 import PayrollCard from "../components/payrollCard";

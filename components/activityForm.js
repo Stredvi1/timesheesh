@@ -26,6 +26,9 @@ export default function ActivityForm() {
 
     const [error, setError] = React.useState(false);
     const router = useRouter();
+    const search = useSearchParams();
+    const id = search.get('id');
+    console.log(id);
 
     const formik = useFormik({
         initialValues: {
@@ -43,8 +46,8 @@ export default function ActivityForm() {
     });
 
     async function handleSubmit(values) {
-        const {id} = router.query;
-        values.projectID = parseInt(id);
+
+        values.projectID = id;
         values.timeFund = parseFloat(values.timeFund);
         console.log(values)
 
