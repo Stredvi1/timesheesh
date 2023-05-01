@@ -5,9 +5,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {LoupeOutlined} from '@mui/icons-material/';
 import Link from "next/link";
+import {useSession} from "next-auth/react";
 
 
 export default function ButtonAppBar() {
+    const {data:session} = useSession();
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">

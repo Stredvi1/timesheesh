@@ -1,0 +1,160 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model tactivity {
+  name        String    @db.VarChar(40)
+  timefund    Float
+  workingTime Float
+  tActivityID Int       @id @default(autoincrement())
+  tUserID     Int
+  tProjectID  Int
+  tHourRateID Int
+  tNoteID     Int
+  thourrate   thourrate @relation(fields: [tHourRateID], references: [tHourRateID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tActivity_tHourRate")
+  tnote       tnote     @relation(fields: [tNoteID], references: [tNoteID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tActivity_tNote")
+  tproject    tproject  @relation(fields: [tProjectID], references: [tProjectID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tActivity_tProject")
+  tuser       tuser     @relation(fields: [tUserID], references: [tUserID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tActivity_tUser")
+  trecord     trecord[]
+
+  @@index([tHourRateID], map: "FK_tActivity_tHourRate")
+  @@index([tNoteID], map: "FK_tActivity_tNote")
+  @@index([tProjectID], map: "FK_tActivity_tProject")
+  @@index([tUserID], map: "FK_tActivity_tUser")
+}
+
+model tbankid {
+  bankCode  String  @unique(map: "bankCode") @db.VarChar(4)
+  tBankIDID Int     @id @default(autoincrement())
+  tuser     tuser[]
+}
+
+model tfile {
+  name    String    @db.VarChar(30)
+  type    String    @db.VarChar(10)
+  url     String    @db.VarChar(100)
+  tFileID Int       @id @default(autoincrement())
+  trecord trecord[]
+}
+
+model thourrate {
+  amount      Float
+  tHourRateID Int         @id @default(autoincrement())
+  tactivity   tactivity[]
+}
+
+model tlogin {
+  email    String @db.VarChar(40)
+  password String @db.VarChar(60)
+  tLoginID Int    @id @default(autoincrement())
+  tuser    tuser?
+}
+
+model tnote {
+  date      DateTime    @db.DateTime(0)
+  text      String      @db.VarChar(400)
+  tNoteID   Int         @id @default(autoincrement())
+  tactivity tactivity[]
+  tproject  tproject[]
+  trecord   trecord[]
+}
+
+model tpayroll {
+  amount          Float
+  date            DateTime          @db.Date
+  tPayrollID      Int               @id @default(autoincrement())
+  tUserID         Int
+  tuser           tuser             @relation(fields: [tUserID], references: [tUserID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tPayroll_tUser")
+  tpayrollrecords tpayrollrecords[]
+
+  @@index([tUserID], map: "FK_tPayroll_tUser")
+}
+
+model tpayrollrecords {
+  tPayrollRecordsID Int      @id @default(autoincrement())
+  tPayrollID        Int
+  tRecordID         Int
+  tpayroll          tpayroll @relation(fields: [tPayrollID], references: [tPayrollID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tPayrollRecords_tPayroll")
+  trecord           trecord  @relation(fields: [tRecordID], references: [tRecordID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tPayrollRecords_tRecord")
+
+  @@index([tPayrollID], map: "FK_tPayrollRecords_tPayroll")
+  @@index([tRecordID], map: "FK_tPayrollRecords_tRecord")
+}
+
+model tpermission {
+  addActivity  Boolean     @db.Bit(1)
+  addProject   Boolean     @db.Bit(1)
+  addRecord    Boolean     @db.Bit(1)
+  addUser      Boolean     @db.Bit(1)
+  name         String      @db.VarChar(20)
+  tPemissionID Int         @id @default(autoincrement())
+  tusertype    tusertype[]
+}
+
+model tproject {
+  budget     Float
+  deadline   DateTime    @db.Date
+  name       String      @db.VarChar(40)
+  tNoteID    Int
+  tProjectID Int         @id @default(autoincrement())
+  tOwnerID   Int
+  isFinished Boolean     @default(dbgenerated("(b'0')")) @db.Bit(1)
+  tactivity  tactivity[]
+  tnote      tnote       @relation(fields: [tNoteID], references: [tNoteID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tProject_tNote")
+  tuser      tuser       @relation(fields: [tOwnerID], references: [tUserID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tProject_tUser")
+
+  @@index([tNoteID], map: "FK_tProject_tNote")
+  @@index([tOwnerID], map: "FK_tProject_tUser")
+}
+
+model trecord {
+  date            DateTime          @db.DateTime(0)
+  workingTime     Float
+  tRecordID       Int               @id @default(autoincrement())
+  tActivityID     Int
+  tFileID         Int?
+  tNoteID         Int
+  tpayrollrecords tpayrollrecords[]
+  tactivity       tactivity         @relation(fields: [tActivityID], references: [tActivityID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tRecord_tActivity")
+  tfile           tfile?            @relation(fields: [tFileID], references: [tFileID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tRecord_tFile")
+  tnote           tnote             @relation(fields: [tNoteID], references: [tNoteID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tRecord_tNote")
+
+  @@index([tActivityID], map: "FK_tRecord_tActivity")
+  @@index([tFileID], map: "FK_tRecord_tFile")
+  @@index([tNoteID], map: "FK_tRecord_tNote")
+}
+
+model tuser {
+  bankAccount String?     @db.VarChar(17)
+  birthNumber String      @unique(map: "birthNumber") @db.VarChar(11)
+  name        String      @db.VarChar(30)
+  surname     String      @db.VarChar(30)
+  tUserID     Int         @id @default(autoincrement())
+  tBankIDID   Int?
+  tLoginID    Int         @unique(map: "tLoginID")
+  tUserTypeID Int
+  tactivity   tactivity[]
+  tpayroll    tpayroll[]
+  tproject    tproject[]
+  tbankid     tbankid?    @relation(fields: [tBankIDID], references: [tBankIDID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tUser_tBankID")
+  tlogin      tlogin      @relation(fields: [tLoginID], references: [tLoginID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tUser_tLogin")
+  tusertype   tusertype   @relation(fields: [tUserTypeID], references: [tUserTypeID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tUser_tUserType")
+
+  @@index([tBankIDID], map: "FK_tUser_tBankID")
+  @@index([tUserTypeID], map: "FK_tUser_tUserType")
+}
+
+model tusertype {
+  name         String      @db.VarChar(20)
+  tUserTypeID  Int         @id @default(autoincrement())
+  tPemissionID Int
+  tuser        tuser[]
+  tpermission  tpermission @relation(fields: [tPemissionID], references: [tPemissionID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tUserType_tPemission")
+
+  @@index([tPemissionID], map: "FK_tUserType_tPemission")
+}

@@ -1,18 +1,21 @@
 import Navbar from './navbar';
 import Footer from './footer';
 import Head from 'next/head';
+import { SessionProvider } from "next-auth/react"
 
-export default function Layout({children}) {
+export default function Layout({children, session}) {
     return (
         <>
-            <Head>
-                <title>TimeShift</title>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
+            <SessionProvider session={session}>
+                <Head>
+                    <title>TimeShift</title>
+                    <link rel="icon" href="/favicon.ico"/>
+                </Head>
 
-            <Navbar/>
-            <main>{children}</main>
-            <Footer/>
+                <Navbar/>
+                <main>{children}</main>
+                <Footer/>
+            </SessionProvider>
 
 
             <style jsx>{`
