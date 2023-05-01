@@ -21,6 +21,7 @@ export default function Footer() {
           width: 100%;
           height: 6rem;
           border-top: 2px solid #eaeaea;
+          background-color: white;
           display: flex;
           justify-content: center;
           align-items: center;
