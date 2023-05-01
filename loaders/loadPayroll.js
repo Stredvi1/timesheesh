@@ -1,15 +1,16 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Card from "../components/recordCard";
+import {useSession} from "next-auth/react";
 
 
 
 export default function load() {
-    const router = useRouter();
-    const {id} = router.query;
-
 
     const [dataResponse, setDataResponse] = useState([]);
+    const {data: session} = useSession();
+
+    const id = session.id;
 
     useEffect(() => {
         if (!router.isReady) {
@@ -17,7 +18,7 @@ export default function load() {
         }
 
         async function getPageData() {
-            const apiUrlEndpoint = `/api/getRecords`;
+            const apiUrlEndpoint = `/api/getPayroll`;
             const postData = {
                 method: "post",
                 headers: {"Content-Type": "application/json"},
@@ -31,22 +32,19 @@ export default function load() {
             setDataResponse(res.records);
         }
 
-        console.log("Record ", id);
-
         getPageData();
     }, [id, router.isReady]);
     return (
         <>
-            {dataResponse?.map((record) => {
+            {dataResponse?.map((payroll) => {
                     return (
 
                         <Card
-                            key={record.id}
-                            id={record.id}
-                            activityID={record.activityID}
-                            date={record.date}
-                            workingTime={record.workingTime}
-                            text={record.text}
+                            key={payroll.id}
+                            id={payroll.id}
+                            fullName={payroll.fullName}
+                            amount={payroll.amount}
+                            bankAccount={payroll.bankAccount}
                         />
                     )
                 }

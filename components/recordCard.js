@@ -1,8 +1,8 @@
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import date from "../formatters/dateTimeFormatter";
-import Link from "next/link";
+import time from "../formatters/worktimeFormatter";
 
 
 export default function RecordCard(record) {
@@ -18,7 +18,7 @@ export default function RecordCard(record) {
     return (
         <RecordCard>
             <Typography><strong>Deadline: </strong>{date(record.date)}</Typography>
-            <Typography><strong>Working time: </strong>{record.workingTime}</Typography>
+            <Typography><strong>Working time: </strong>{time(record.workingTime)}</Typography>
             <Typography><strong>Text: </strong>{record.text}</Typography>
         </RecordCard>
     )
