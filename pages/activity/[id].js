@@ -2,8 +2,6 @@ import {useRouter} from "next/router";
 import Details from "../../loaders/loadActivityDetails";
 import styles from "../../styles/Home.module.css";
 import AddRecord from "/components/recordForm";
-import Records from "../../loaders/loadRecords";
-import {Stack} from '@mui/material';
 
 
 export default function Activity() {
