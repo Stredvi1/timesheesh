@@ -23,7 +23,7 @@ export default function ActivityCard(activity) {
                 <Typography><strong>Odpracováno: </strong>{time(activity.workingTime)}</Typography>
             </Box>
 
-            <Link href="./overview">
+            <Link href={`/activity/${activity.id}`}>
                 <Button variant="contained">Detail</Button>
             </Link>
         </ActivityCard>

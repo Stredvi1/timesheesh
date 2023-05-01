@@ -6,9 +6,6 @@ import {Stack} from '@mui/material';
 
 
 export default function ProjectDetails() {
-
-
-
     return (
         <>
             <div className={styles.wrapper}>
