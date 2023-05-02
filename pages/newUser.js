@@ -12,7 +12,7 @@ export default function newUser({notSession}) {
     if (!notSession) {
         redirect('/');
     } else if (notSession.user.role === 1) {
-        redirect('/');
+        console.log(notSession.user.id)
     }
 
     return (
