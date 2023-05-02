@@ -1,6 +1,9 @@
 import { query } from "./db";
+import {hash} from "bcrypt";
 
 export default async function handler(props, res) {
+    //todo validate alllllll inputs
+
     try {
         const querySQL = "CALL `addUser` (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -9,7 +12,7 @@ export default async function handler(props, res) {
             props.body.surname,
             props.body.birthNumber,
             props.body.email,
-            props.body.password,
+            await hash(props.body.password, 10),
             props.body.userTypeID,
             props.body.bankAccount,
             props.body.bankCode];

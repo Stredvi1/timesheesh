@@ -3,7 +3,7 @@ import mysql from "mysql2/promise"
 export async function query({query, values = []}) {
 
     const connection = await mysql.createConnection({
-        host: 'localhost',
+        host: process.env.DB_HOST,
         user: 'root',
         password: '',
         database: 'timeshift',

@@ -7,8 +7,6 @@ import Records from "../../loaders/loadRecords";
 
 
 export default function Activity() {
-
-
     return (
         <>
             <div className={styles.wrapper}>

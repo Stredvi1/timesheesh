@@ -49,7 +49,7 @@ model thourrate {
 }
 
 model tlogin {
-  email    String @db.VarChar(40)
+  email    String @unique(map: "email") @db.VarChar(40)
   password String @db.VarChar(60)
   tLoginID Int    @id @default(autoincrement())
   tuser    tuser?

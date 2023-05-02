@@ -16,19 +16,21 @@ const initialValues = {
 
 export default function LoginForm() {
     const submitForm = async ({email, password}, bag) => {
-        bag.resetForm(initialValues);
-        bag.setFieldValue('login', email);
+        //bag.resetForm(initialValues);
+        //bag.setFieldValue('login', email);
 
         const {ok, status} = await signIn("credentials", {email, password, redirect: false});
 
         if (ok) {
-            router.push("/overview");
+            await router.push("/overview");
         } else {
-            errorP.current.innerText = "Login nebo heslo nesprávné!";
+            setErrorMessage(status.toString());
+            setError(true);
         }
     };
 
     const [error, setError] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState('');
     const router = useRouter();
 
     const formik = useFormik({
@@ -100,7 +102,7 @@ export default function LoginForm() {
                     sx={{mb: 2}}
                 >
                     <AlertTitle>Chyba</AlertTitle>
-                    Nastala neočekávaná chyba v databázi
+                    {errorMessage}
                 </Alert>
             </Snackbar>
 
