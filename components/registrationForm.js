@@ -26,7 +26,6 @@ import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/
 
 
 export default function RegistrationForm() {
-
     const [error, setError] = React.useState(false);
     const router = useRouter();
 
@@ -49,7 +48,7 @@ export default function RegistrationForm() {
     });
 
     async function handleSubmit(values) {
-        const copyValues = Object.assign({}, values)
+        const copyValues = {...values};
 
         if (copyValues.bankAccount === "") {
             copyValues.bankAccount = null;

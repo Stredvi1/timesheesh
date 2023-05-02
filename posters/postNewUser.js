@@ -1,8 +1,6 @@
-import {useRouter} from "next/router";
-
-
 export default async function addUser(props) {
 
+    const router = useRouter();
     const apiUrlEndpoint = `/api/addUser`;
 
     const postData = {
@@ -19,10 +17,8 @@ export default async function addUser(props) {
             bankCode: props.bankCode
         })
     }
-    const response = await fetch(apiUrlEndpoint, postData);
-    console.log(response);
 
-    if (response.ok) {
-        return true;
-    }
+    const response = await fetch(apiUrlEndpoint, postData);
+
+    return response.ok;
 }
