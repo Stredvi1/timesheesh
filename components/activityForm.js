@@ -47,7 +47,7 @@ export default function ActivityForm() {
 
     async function handleSubmit(values) {
 
-        values.projectID = id;
+        values.projectID = parseInt(id);
         values.timeFund = parseFloat(values.timeFund);
         console.log(values)
 

@@ -27,19 +27,21 @@ export default function NewRecord() {
             description: '',
         },
         validationSchema: RecordScheme,
-        onSubmit: async (values) => {
-            await handleSubmit(values)
+        onSubmit: async (values, helpers) => {
+            await handleSubmit(values, helpers)
         },
     });
 
-    async function handleSubmit(values) {
+    async function handleSubmit(values, helpers) {
 
         values.id = id;
         console.log(values)
         const res = await addRecord(values);
 
         if (res) {
-            await router.back()
+            helpers.resetForm({
+                values,
+            });
         } else {
             setError(true);
         }
