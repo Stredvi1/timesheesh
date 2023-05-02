@@ -14,6 +14,7 @@ export default function test() {
                 const res = await response.json();
                 setdataResponse(res.projects)
             }
+
         }
 
         getPageData().catch();
@@ -21,8 +22,8 @@ export default function test() {
     return (
         <>
             {dataResponse?.map((project) => {
-                if(project.workingTime == null) {
-                    project.workingTime = 0;
+                if(project.amount == null) {
+                    project.amount = 0;
                 }
                     return (
 
@@ -30,7 +31,7 @@ export default function test() {
                             name={project.name}
                             budget={project.budget}
                             deadline={project.deadline}
-                            workingTime={project.workingTime}
+                            amount={project.amount}
                             id={project.id}
                             key={project.id}
                         />
