@@ -11,7 +11,11 @@ export const authOptions = {
                 password: {label: "password", type: "password"},
             },
             async authorize(credentials) {
-                const { login: email, password } = credentials;
+                const { email, password } = credentials;
+
+                if (!email || !password) {
+                    throw new Error("Missing email or password");
+                }
                 const user = await prisma.tlogin.findUnique({where:{email}});
 
                 if (!user || !(await compare(password, user.password))){
