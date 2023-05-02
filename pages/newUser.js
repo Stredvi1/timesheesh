@@ -11,10 +11,6 @@ export default function newUser({notSession}) {
         redirect('/');
     }
 
-    if (session.status === 'loading') {
-        return '';
-    }
-
     return (
         <div className={styles.wrapper}>
             <RegistrationForm/>

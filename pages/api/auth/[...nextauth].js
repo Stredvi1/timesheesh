@@ -23,10 +23,12 @@ export const authOptions = {
                     throw new Error("Invalid email or password");
                 }
 
-                const [perm] = await prisma.$queryRaw`SELECT permissionID FROM userpermissions WHERE loginID = ${user.tLoginID}`;
+                const [perm] = await prisma.$queryRaw`SELECT permissionID, userID, fullName FROM userpermissions WHERE loginID = ${user.tLoginID}`;
 
                 if (perm && perm.permissionID) {
                     user.role = perm.permissionID;
+                    user.id = perm.userID;
+                    user.name = perm.fullName;
                 }
 
                 console.log(user);
