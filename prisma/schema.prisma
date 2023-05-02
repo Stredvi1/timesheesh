@@ -52,7 +52,7 @@ model thourrate {
 model tlogin {
   email    String @unique(map: "email") @db.VarChar(40)
   password String @db.VarChar(60)
-  tLoginID Int    @id @unique(map: "tLoginID") @default(autoincrement())
+  tLoginID Int    @id @default(autoincrement())
   tuser    tuser?
 }
 
@@ -237,18 +237,37 @@ view currentpayrols {
 
 /// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 view projectsdetails {
-  id          Int      @default(0)
-  name        String   @db.VarChar(40)
-  budget      Float
-  workingTime Float?
-  deadline    DateTime @db.Date
-  note        String?  @db.VarChar(400)
-  isFinished  Boolean  @default(dbgenerated("(b'0')")) @db.Bit(1)
+  id         Int      @default(0)
+  name       String   @db.VarChar(40)
+  budget     Float
+  amount     Float?
+  deadline   DateTime @db.Date
+  note       String?  @db.VarChar(400)
+  isFinished Boolean  @default(dbgenerated("(b'0')")) @db.Bit(1)
 
   @@ignore
 }
 
 view userpermissions {
-  tLoginID     Int @unique @default(0)
-  permissionID Int @default(0)
+  loginID      Int    @unique @default(0)
+  permissionID Int    @default(0)
+  userID       Int    @default(0)
+  fullName     String @default("") @db.VarChar(61)
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view activityamount {
+  tActivityID Int    @default(0)
+  tProjectID  Int
+  amount      Float?
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view projectamount {
+  tProjectID Int
+  amount     Float?
+
+  @@ignore
 }
