@@ -17,34 +17,36 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 export default function NewRecord() {
 
     const [error, setError] = React.useState(false);
+    const [disabled, setDisabled] = React.useState(false);
     const router = useRouter();
     const {id} = router.query;
 
     const formik = useFormik({
         initialValues: {
             workingTime: '',
-            date: '',
+            date: dayjs(),
             description: '',
         },
         validationSchema: RecordScheme,
-        onSubmit: async (values, helpers) => {
-            await handleSubmit(values, helpers)
+        onSubmit: async (values, {resetForm}) => {
+            setDisabled(true);
+            await handleSubmit(values, resetForm);
         },
     });
 
-    async function handleSubmit(values, helpers) {
+    async function handleSubmit(values, resetForm) {
 
         values.id = id;
         console.log(values)
         const res = await addRecord(values);
 
         if (res) {
-            helpers.resetForm({
-                values,
-            });
+            resetForm();
+            values.date = '';
         } else {
             setError(true);
         }
+        setDisabled(false);
     }
 
     return (
@@ -89,7 +91,7 @@ export default function NewRecord() {
                                         label="Datum"
                                         required
                                         variant="outlined"
-                                        format="DD-MM-YYYY"
+                                        format="DD-MM-YYYY hh:mm"
                                         onChange={(value) => {
                                             formik.setFieldValue('date', dayjs(value).format("YYYY-MM-DD hh:mm:ss"));
                                         }}
@@ -111,7 +113,7 @@ export default function NewRecord() {
                                     helperText={formik.touched.description && formik.errors.description}
                                 />
 
-                                <Button variant="contained" type="submit">Vytvořit výkaz</Button>
+                                <Button variant="contained" type="submit" disabled={disabled}>Vytvořit výkaz</Button>
                             </Stack>
                         </Box>
                     </Paper>

@@ -18,8 +18,9 @@ export default function RecordCard(record) {
     return (
         <RecordCard>
             <Typography><strong>Deadline: </strong>{date(record.date)}</Typography>
-            <Typography><strong>Working time: </strong>{time(record.workingTime)}</Typography>
-            <Typography><strong>Text: </strong>{record.text}</Typography>
+            <Typography><strong>Odpracováno: </strong>{time(record.workingTime)}</Typography>
+            <Typography><strong>Poznámka:</strong></Typography>
+            <Typography><i>{record.text}</i></Typography>
         </RecordCard>
     )
 }
