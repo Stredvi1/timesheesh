@@ -8,6 +8,7 @@ import Link from "next/link";
 import {useSession} from "next-auth/react";
 import {IconButton, Stack} from "@mui/material";
 import {useRouter} from "next/router";
+import {signOut} from "next-auth/react";
 
 
 export default function ButtonAppBar() {
@@ -35,7 +36,7 @@ export default function ButtonAppBar() {
                         component="div" sx={{flexGrow: 1}}
                         alignItems="center">
                         <Box
-                            sx={{ display: 'flex' }}>
+                            sx={{display: 'flex'}}>
                             <LoupeOutlined/>
                             <Typography variant="h6">
                                 TimeShift
@@ -67,9 +68,11 @@ export default function ButtonAppBar() {
                     <Link href='/newUser'>
                         <Button color="inherit">Přidat uživatele</Button>
                     </Link>
-                    <Link href='/'>
-                        <Button color="inherit">Odhlášení</Button>
-                    </Link>
+                    <Button
+                        color="inherit"
+                        onClick={() => signOut({callbackUrl: `/`})}
+                    >Odhlášení
+                    </Button>
                 </Toolbar>
             </AppBar>
         </Box>

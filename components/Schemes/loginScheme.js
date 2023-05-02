@@ -8,6 +8,6 @@ export const LoginScheme = Yup.object().shape({
     password: Yup.string()
         .required('Heslo je povinný údaj')
         .min(6, 'Heslo musí být alespoň 6 znaků dlouhé')
-        .max(40, 'Heslo je příliš dlouhé'),
+        .max(60, 'Heslo je příliš dlouhé'),
 
 });

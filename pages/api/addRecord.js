@@ -4,7 +4,7 @@ export default async function handler(props, res) {
     try {
         const querySQL = "CALL `addRecord` (?, ?, ?, ?, ?)";
 
-        const userID = 29;
+        const userID = 1;
 
         const valueParams = [
             userID,

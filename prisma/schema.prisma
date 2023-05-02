@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
 }
 
 datasource db {
@@ -51,7 +52,7 @@ model thourrate {
 model tlogin {
   email    String @unique(map: "email") @db.VarChar(40)
   password String @db.VarChar(60)
-  tLoginID Int    @id @default(autoincrement())
+  tLoginID Int    @id @unique(map: "tLoginID") @default(autoincrement())
   tuser    tuser?
 }
 
@@ -157,4 +158,97 @@ model tusertype {
   tpermission  tpermission @relation(fields: [tPemissionID], references: [tPemissionID], onDelete: NoAction, onUpdate: NoAction, map: "FK_tUserType_tPemission")
 
   @@index([tPemissionID], map: "FK_tUserType_tPemission")
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view activitiesdetails {
+  id          Int     @default(0)
+  name        String  @db.VarChar(40)
+  note        String? @db.VarChar(400)
+  fullName    String? @db.VarChar(61)
+  timefund    Float
+  workingTime Float
+  hourRate    Float?
+  projectName String? @db.VarChar(40)
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view activityworkingtime {
+  tActivityID Int    @default(0)
+  tProjectID  Int
+  amount      Float?
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view allactivites {
+  id          Int     @default(0)
+  projectID   Int
+  name        String  @db.VarChar(40)
+  timefund    Float
+  workingTime Float
+  fullName    String? @db.VarChar(61)
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view allprojects {
+  tProjectID     Int?      @default(0)
+  name           String?   @db.VarChar(40)
+  deadline       DateTime? @db.Date
+  budget         Float?
+  assignedToUser Int       @default(0)
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view allrecords {
+  id          Int      @default(0)
+  activityID  Int
+  date        DateTime @db.DateTime(0)
+  workingTime Float
+  text        String?  @db.VarChar(400)
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view allworkers {
+  id       Int    @default(0)
+  fullName String @default("") @db.VarChar(61)
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view currentpayrols {
+  tUserID     Int     @default(0)
+  fullName    String  @default("") @db.VarChar(61)
+  amount      Float?
+  bankAccount String? @db.VarChar(22)
+
+  @@ignore
+}
+
+/// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+view projectsdetails {
+  id          Int      @default(0)
+  name        String   @db.VarChar(40)
+  budget      Float
+  workingTime Float?
+  deadline    DateTime @db.Date
+  note        String?  @db.VarChar(400)
+  isFinished  Boolean  @default(dbgenerated("(b'0')")) @db.Bit(1)
+
+  @@ignore
+}
+
+view userpermissions {
+  tLoginID     Int @unique @default(0)
+  permissionID Int @default(0)
 }

@@ -40,9 +40,9 @@ export default function load() {
     }, [id, router.isReady]);
     return (
         <>
-            {dataResponse?.map((payroll) => {
-                    return (
-                        <Typography><strong>{payroll.fullName}</strong></Typography>)
+            {dataResponse?.map((payroll) => (
+                    <>
+                        <Typography><strong>{payroll.fullName}</strong></Typography>
                         <Typography><strong>Částka: </strong>{currency(payroll.amount)}</Typography>
                         <Typography><strong>Bankovní účet: </strong>{payroll.bankAccount}</Typography>
                 )

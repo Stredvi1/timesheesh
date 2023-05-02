@@ -22,8 +22,14 @@ export const authOptions = {
                 if (!user || !(await compare(password, user.password))){
                     throw new Error("Invalid email or password");
                 }
-                console.log(user.tLoginID);
-                //todo get role from db
+
+                const [perm] = await prisma.$queryRaw`SELECT permissionID FROM userpermissions WHERE loginID = ${user.tLoginID}`;
+
+                if (perm && perm.permissionID) {
+                    user.role = perm.permissionID;
+                }
+
+                console.log(user);
 
                 return {...user, role: 1};
             }

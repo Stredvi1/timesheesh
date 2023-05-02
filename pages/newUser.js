@@ -30,12 +30,10 @@ export default function newUser({sdfs}) {
     );
 }
 
-export async function getStaticProps() {
-    const a = await prisma.tlogin.findUnique({where:{email: 'xd@email.xy'}});
-
+export async function getServerSideProps(context) {
     return {
-      props: {
-          sdfs: a
-      }
-    };
+        props: {
+            notSession: await getSession(context)
+        }
+    }
 }

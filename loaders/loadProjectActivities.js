@@ -58,8 +58,6 @@ export default function load() {
                                     workingTime={activity.workingTime}
                                     fullName={activity.fullName}
                                 />
-
-
                             )
                         }
                     )}
