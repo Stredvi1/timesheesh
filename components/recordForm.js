@@ -19,7 +19,8 @@ export default function NewRecord() {
     const [error, setError] = React.useState(false);
     const [disabled, setDisabled] = React.useState(false);
     const router = useRouter();
-    const {id} = router.query;
+    const {activityId} = router.query;
+    const session = useSession();
 
     const formik = useFormik({
         initialValues: {
@@ -36,8 +37,8 @@ export default function NewRecord() {
 
     async function handleSubmit(values) {
 
-        values.id = id;
-        console.log(values)
+        values.activityId = activityId;
+        values.userId = session.data.user;
         const res = await addRecord(values);
 
         if (res) {
