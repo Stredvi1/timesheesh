@@ -1,6 +1,8 @@
 SELECT
-  `l`.`tLoginID` AS `tLoginID`,
-  `p`.`tPemissionID` AS `permissionID`
+  `l`.`tLoginID` AS `loginID`,
+  `p`.`tPemissionID` AS `permissionID`,
+  `u`.`tUserID` AS `userID`,
+  concat(`u`.`name`, ' ', `u`.`surname`) AS `fullName`
 FROM
   (
     (
