@@ -1,14 +1,18 @@
 import styles from "../styles/Home.module.css";
 
 import RegistrationForm from '../components/registrationForm';
-import { getSession } from 'next-auth/react';
+import {getSession} from 'next-auth/react';
 import {redirect} from "next/navigation";
+import {useRouter} from 'next/navigation'
+
 
 export default function newUser({notSession}) {
+    const router = useRouter()
+
     if (!notSession) {
         redirect('/');
-    } else if (notSession.user.role === 2) {
-        redirect('/');
+    } else if (notSession.user.role === 1) {
+        console.log(notSession.user.id)
     }
 
     return (
