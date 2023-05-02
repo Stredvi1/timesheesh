@@ -45,8 +45,8 @@ export default function load() {
                         <Typography><strong>{payroll.fullName}</strong></Typography>
                         <Typography><strong>Částka: </strong>{currency(payroll.amount)}</Typography>
                         <Typography><strong>Bankovní účet: </strong>{payroll.bankAccount}</Typography>
+                    </>
                 )
-                }
             )}
         </>
     )

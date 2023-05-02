@@ -1,23 +1,15 @@
 import styles from "../styles/Home.module.css";
 
-import React, {useEffect} from 'react';
 import RegistrationForm from '../components/registrationForm';
-import {useSession} from "next-auth/react";
-import {useRouter} from "next/router";
-import prisma from "/lib/prisma";
+import { getSession } from 'next-auth/react';
+import {redirect} from "next/navigation";
 
-
-export default function newUser({sdfs}) {
-    console.log('NEW uSER ', sdfs);
-
-    const session = useSession();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (session.status === 'unauthenticated') {
-            router.replace('/').catch();
-        }
-    }, [session]);
+export default function newUser({notSession}) {
+    if (!notSession) {
+        redirect('/');
+    } else if (notSession.user.role === 2) {
+        redirect('/');
+    }
 
     if (session.status === 'loading') {
         return '';
