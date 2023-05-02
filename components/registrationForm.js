@@ -56,7 +56,6 @@ export default function RegistrationForm() {
         }
 
         const res = await addUser(copyValues);
-        console.log(res);
 
         if (res) {
             await router.push("/overview");

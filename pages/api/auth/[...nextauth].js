@@ -13,6 +13,7 @@ export const authOptions = {
             },
             async authorize(credentials) {
                 const { email, password } = credentials;
+                console.log(email);
 
                 if (!email || !password) {
                     throw new Error("Missing email or password");
@@ -22,7 +23,6 @@ export const authOptions = {
                 if (!user || !(await compare(password, user.password))){
                     throw new Error("Invalid email or password");
                 }
-                console.log(user.tLoginID);
                 //todo get role from db
 
                 return {...user, role: 1};

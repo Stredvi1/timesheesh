@@ -1,6 +1,5 @@
 export default async function addUser(props) {
 
-    const router = useRouter();
     const apiUrlEndpoint = `/api/addUser`;
 
     const postData = {

@@ -8,7 +8,7 @@ import prisma from "/lib/prisma";
 
 
 export default function newUser({sdfs}) {
-    console.log(sdfs);
+    console.log('NEW uSER ', sdfs);
 
     const session = useSession();
     const router = useRouter();
