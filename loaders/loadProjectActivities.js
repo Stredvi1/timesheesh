@@ -33,9 +33,6 @@ export default function load() {
             setDataResponse(res.activities);
         }
 
-        console.log("Activity ", id);
-        console.log(dataResponse);
-
         getPageData();
     }, [id, router.isReady]);
 

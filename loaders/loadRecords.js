@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Card from "../components/recordCard";
+import NoRecord from "../components/nothingHereText";
 
 
 
@@ -35,22 +36,31 @@ export default function load() {
 
         getPageData();
     }, [id, router.isReady]);
-    return (
-        <>
-            {dataResponse?.map((record) => {
-                    return (
 
-                        <Card
-                            key={record.id}
-                            id={record.id}
-                            activityID={record.activityID}
-                            date={record.date}
-                            workingTime={record.workingTime}
-                            text={record.text}
-                        />
-                    )
-                }
-            )}
-        </>
-    )
+    if (dataResponse.length === 0) {
+        return (
+            <>
+                <NoRecord text={"výkaz"}/>
+            </>
+        )
+    } else {
+        return (
+            <>
+                {dataResponse?.map((record) => {
+                        return (
+
+                            <Card
+                                key={record.id}
+                                id={record.id}
+                                activityID={record.activityID}
+                                date={record.date}
+                                workingTime={record.workingTime}
+                                text={record.text}
+                            />
+                        )
+                    }
+                )}
+            </>
+        )
+    }
 }

@@ -3,6 +3,7 @@ import Paper from '@mui/material/Paper';
 import {Box, Button, Stack, Typography} from "@mui/material";
 import currency from "../formatters/currencyFormatter";
 import date from "../formatters/dateTimeFormatter";
+import time from "../formatters/worktimeFormatter";
 import Link from "next/link";
 
 
@@ -20,10 +21,12 @@ export default function ProjectCard(project) {
             <Typography variant="h4" color="primary">{project.name}</Typography>
             <Box sx={{pb: 2, pt: 1}}>
                 <Typography><strong>Budget: </strong>{currency(project.budget)}</Typography>
+                <Typography><strong>Odpracováno: </strong>{time(project.workingTime)}</Typography>
                 <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
             </Box>
             <Link href={`/project/${project.id}`}>
-                <Button variant="contained">Detail</Button>
+                <Button variant="contained"
+                >Detail</Button>
             </Link>
         </ProjectCard>
     )

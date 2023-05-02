@@ -24,25 +24,24 @@ export default function NewRecord() {
     const formik = useFormik({
         initialValues: {
             workingTime: '',
-            date: dayjs(),
+            date: '',
             description: '',
         },
         validationSchema: RecordScheme,
         onSubmit: async (values, {resetForm}) => {
             setDisabled(true);
-            await handleSubmit(values, resetForm);
+            await handleSubmit(values);
         },
     });
 
-    async function handleSubmit(values, resetForm) {
+    async function handleSubmit(values) {
 
         values.id = id;
         console.log(values)
         const res = await addRecord(values);
 
         if (res) {
-            resetForm();
-            values.date = '';
+            router.reload();
         } else {
             setError(true);
         }
