@@ -9,7 +9,7 @@ import {IconButton, Stack} from "@mui/material";
 import {useRouter} from "next/router";
 import {signOut} from "next-auth/react";
 import {useSession} from "next-auth/react"
-
+import {Conditional} from '@/utils/Conditional';
 
 
 export default function ButtonAppBar() {
@@ -19,9 +19,7 @@ export default function ButtonAppBar() {
 
 
     function home() {
-        if (router.pathname !== "/overview") {
-            router.push("/overview");
-        }
+        router.push("/overview");
     }
 
     function back() {
@@ -45,28 +43,33 @@ export default function ButtonAppBar() {
                                     TimeShift
                                 </Typography>
                             </Box>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{mr: 2}}
-                                onClick={() => {
-                                    back();
-                                }}>
-                                <ArrowBack/>
-                            </IconButton>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{mr: 2}}
-                                onClick={() => {
-                                    home();
-                                }}>
-                                <HomeOutlined/>
-                            </IconButton>
+                            <Conditional showWhen={router.pathname !== '/overview'}>
+
+                                <IconButton
+                                    size="large"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    sx={{mr: 2}}
+                                    onClick={() => {
+                                        back();
+                                    }}>
+                                    <ArrowBack/>
+                                </IconButton>
+                                <IconButton
+                                    size="large"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    sx={{mr: 2}}
+                                    onClick={() => {
+                                        home();
+                                    }}>
+                                    <HomeOutlined/>
+                                </IconButton>
+
+                            </Conditional>
+
                         </Stack>
                         {session.user.role === 1 && <Link href='/newUser'>
                             <Button color="inherit">Přidat uživatele</Button>
