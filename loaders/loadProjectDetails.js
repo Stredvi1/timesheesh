@@ -56,7 +56,7 @@ export default function load() {
 
                             </Box>
                             <Box>
-                                <Progress value={percentage(project.budget, project.amount)} size={"10rem"} color={"contrast"}/>
+                                <Progress value={percentage(project.budget, project.amount)} size={"10rem"} color={"primary"}/>
                             </Box>
                         </Stack>
 

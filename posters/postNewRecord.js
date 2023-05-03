@@ -7,8 +7,8 @@ export default async function addRecord(props) {
 
     const postData = {
         method: "post", headers: {"Content-Type": "application/json"}, body: JSON.stringify({
-            activityID: props.id,
-            userId: props.userId,
+            activityID: props.activityID,
+            userID: props.userID,
             workingTime: props.workingTime,
             date: props.date,
             description: props.description,

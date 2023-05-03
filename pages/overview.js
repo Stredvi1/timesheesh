@@ -18,7 +18,7 @@ export default function Overview() {
         <>
             <div className={styles.wrapper}>
                 <Box className={styles.upperBox}>
-                    <Typography variant="h3">Vítejte, {session.user.name}</Typography>
+                    <Typography variant="h3">Vítejte, {session?.user.name}</Typography>
                 </Box>
                 <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
                     <Stack flexWrap spacing={4} sx={{p: 6, width: '100%'}} direction="row">
@@ -28,7 +28,7 @@ export default function Overview() {
                         <PayrollCard/>
                     </div>
                 </div>
-                {(session.user.role === 1 || session.user.role === 2) && <AddProject url={"/newProject"} name={"Projekt"} useId={false}/>}
+                {(session?.user.role === 1 || session?.user.role === 2) && <AddProject url={"/newProject"} name={"Projekt"} useId={false}/>}
             </div>
         </>
     )

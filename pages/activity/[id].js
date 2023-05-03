@@ -19,7 +19,7 @@ export default function Activity() {
                     <Stack flexWrap spacing={4} sx={{p: 6, width: '100%'}} direction="row">
                         <Records/>
                     </Stack>
-                    {session.user.role !== 4 && <div style={{width: 'fit-content', right: 0, position: "fixed"}}>
+                    {session?.user.role !== 4 && <div style={{width: 'fit-content', right: 0, position: "fixed"}}>
                         <AddRecord/>
                     </div>}
                 </div>

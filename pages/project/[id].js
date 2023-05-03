@@ -14,7 +14,7 @@ export default function ProjectDetails() {
             <div className={styles.wrapper}>
                 <Details/>
                    <Activities/>
-                {session.user.role !== 4 && <AddActivity url={"/newActivity"} name={"Aktivitu"} useId={true}/>}
+                {session?.user.role !== 4 && <AddActivity url={"/newActivity"} name={"Aktivitu"} useId={true}/>}
             </div>
         </>
     )

@@ -52,5 +52,10 @@ export default function CircularStatic({value, size, color}) {
         };
     }, []);
 
+    if(value >= 75) {
+        color = "warning";
+    } else if(value >= 100) {
+        color = 'error';
+    }
     return <CircularProgressWithLabel value={progress} size={size} color={color}/>;
 }

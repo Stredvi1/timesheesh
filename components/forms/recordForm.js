@@ -12,6 +12,7 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateField} from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import {useSession} from "next-auth/react";
 
 
 export default function NewRecord() {
@@ -19,7 +20,8 @@ export default function NewRecord() {
     const [error, setError] = React.useState(false);
     const [disabled, setDisabled] = React.useState(false);
     const router = useRouter();
-    const {activityId} = router.query;
+    const {id: activityID} = router.query;
+    const {data: session} = useSession();
 
     const formik = useFormik({
         initialValues: {
@@ -28,7 +30,7 @@ export default function NewRecord() {
             description: '',
         },
         validationSchema: RecordScheme,
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values) => {
             setDisabled(true);
             await handleSubmit(values);
         },
@@ -36,8 +38,8 @@ export default function NewRecord() {
 
     async function handleSubmit(values) {
 
-        values.activityId = activityId;
-        values.userId = session.data.user;
+        values.activityID = parseInt(activityID);
+        values.userID = session?.user.id;
         const res = await addRecord(values);
 
         if (res) {

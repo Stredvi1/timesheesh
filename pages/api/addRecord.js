@@ -38,12 +38,14 @@ export default async function handler(req, res) {
         const querySQL = "CALL `addRecord` (?, ?, ?, ?, ?)";
 
         const valueParams = [
-            validData.userId,
+            validData.userID,
             validData.activityID,
             validData.workingTime,
             validData.date,
             validData.description,
             ];
+
+
 
         await query({query: querySQL, values: valueParams });
 
