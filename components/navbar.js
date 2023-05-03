@@ -11,7 +11,7 @@ import {signOut} from "next-auth/react";
 import {getSession} from 'next-auth/react';
 import {useSession} from "next-auth/react"
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/pages/api/auth/[...nextauth]";
+//import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
 export default function ButtonAppBar({notSession}) {
@@ -84,16 +84,4 @@ export default function ButtonAppBar({notSession}) {
         );
     }
 
-}
-
-export async function getServerSideProps(context) {
-    return {
-        props: {
-            session: await getServerSession(
-                context.req,
-                context.res,
-                authOptions
-            ),
-        },
-    }
 }

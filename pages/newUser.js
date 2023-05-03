@@ -1,14 +1,14 @@
 import styles from "../styles/Home.module.css";
 
 import RegistrationForm from '../components/registrationForm';
-import {getSession, useSession} from 'next-auth/react';
+import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
-import {redirect} from "next/navigation";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
 export default function newUser() {
+    return '';
     const router = useRouter();
 
     const {data: session} = useSession();
@@ -49,7 +49,7 @@ export default function newUser() {
     }*/
 }
 
-export async function getServerSideProps(context) {
+/*export async function getServerSideProps(context) {
     return {
         props: {
             session: await getServerSession(
@@ -59,4 +59,4 @@ export async function getServerSideProps(context) {
             ),
         },
     }
-}
+}*/
