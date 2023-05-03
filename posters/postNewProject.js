@@ -13,6 +13,7 @@ export default async function addProject(props) {
             budget: props.budget,
             deadline: props.deadline,
             description: props.description,
+            userID: props.userID
         })
     }
     const response = await fetch(apiUrlEndpoint, postData);

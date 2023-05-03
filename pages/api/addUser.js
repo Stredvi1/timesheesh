@@ -56,7 +56,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        /*const querySQL = "CALL `addUser` (?, ?, ?, ?, ?, ?, ?, ?)";
+        const querySQL = "CALL `addUser` (?, ?, ?, ?, ?, ?, ?, ?)";
 
         const valueParams = [
             validData.name,
@@ -67,16 +67,20 @@ export default async function handler(req, res) {
             validData.userTypeID,
             validData.bankAccount,
             validData.bankCode
-        ];*/
+        ];
 
-        await prisma.$queryRaw`CALL addUser (${validData.name}, ${validData.surname}, ${validData.birthNumber}, ${validData.email}, ${await hash(validData.password, 10)}, ${validData.userTypeID}, ${validData.bankAccount}, ${validData.bankCode})`;
-        //await query({query: querySQL, values: valueParams});
+        //PRISMA for bettr error
+        // const a = await prisma.$queryRaw`CALL addUser (${validData.name}, ${validData.surname}, ${validData.birthNumber}, ${validData.email}, ${await hash(validData.password, 10)}, ${validData.userTypeID}, ${validData.bankAccount}, ${validData.bankCode})`;
+
+        // console.log(a)
+        await query({query: querySQL, values: valueParams});
 
         res.status(201).json({success: true});
 
     } catch (error) {
         console.log(43, error)
-        res.status(500).json({error: error.meta.message});
+        // res.status(500).json({error: error.meta.message});
+        res.status(500).json({error: error.message});
     }
 }
 

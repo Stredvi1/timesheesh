@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const ActivityScheme = Yup.object().shape({
     activityName: Yup.string()
         .required('Název aktivity je povinný údaj')
-        .max(40, 'Název projektu je moc dlouhé (40 znaků)'),
+        .max(40, 'Název aktivity je moc dlouhý (40 znaků)'),
 
     timeFund: Yup.string()
         .required('Časofond je povinný údaj')
