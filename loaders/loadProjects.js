@@ -13,6 +13,8 @@ export default function test() {
             if(response.ok) {
                 const res = await response.json();
                 setdataResponse(res.projects)
+                console.log(69, res.projects)
+
             }
 
         }

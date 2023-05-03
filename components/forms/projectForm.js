@@ -90,7 +90,6 @@ export default function ProjectForm() {
                                         variant="outlined"
                                         format="DD-MM-YYYY"
                                         onChange={(value) => {
-                                            console.log(dayjs(value).format())
                                             formik.setFieldValue('deadline', dayjs(value).format("YYYY-MM-DD"));
                                         }}
                                         error={formik.touched.deadline && Boolean(formik.errors.deadline)}

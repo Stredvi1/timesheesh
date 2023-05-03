@@ -32,8 +32,6 @@ export const authOptions = {
                     user.name = perm.fullName;
                 }
 
-                console.log(user);
-
                 return user;
             }
         })
