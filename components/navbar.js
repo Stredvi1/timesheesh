@@ -17,7 +17,6 @@ export default function ButtonAppBar() {
 
     const {data: session, status} = useSession();
 
-
     function home() {
         router.push("/overview");
     }

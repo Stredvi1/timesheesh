@@ -8,8 +8,6 @@ import AddProject from "../components/addButton";
 import PayrollCard from "../components/payrollCard";
 import {useSession} from "next-auth/react";
 
-
-
 export default function Overview() {
 
     const {data: session, status} = useSession();

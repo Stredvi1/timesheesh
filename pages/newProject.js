@@ -12,19 +12,16 @@ export default function newProject() {
     const router = useRouter()
 
     const {data: session} = useSession();
-
-
+    
     if (session === undefined) {
         return '';
     }else if (session === null) {
         router.push('/');
         return '';
-    }else if (session.user.role !== 1 || session.user.role !== 2) {
+    }else if (session.user.role !== 1 && session.user.role !== 2) {
         router.push('/');
         return '';
     }
-
-
 
     return (
         <div className={styles.wrapper}>

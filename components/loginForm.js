@@ -15,9 +15,7 @@ const initialValues = {
 };
 
 export default function LoginForm() {
-    const submitForm = async ({email, password}, bag) => {
-        //bag.resetForm(initialValues);
-        //bag.setFieldValue('login', email);
+    const submitForm = async ({email, password}, ) => {
 
         const {ok, status} = await signIn("credentials", {email, password, redirect: false});
 
