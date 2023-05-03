@@ -9,7 +9,7 @@ import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
 export default function newProject() {
-    const router = useRouter()
+    const router = useRouter();
 
     const {data: session} = useSession();
     
