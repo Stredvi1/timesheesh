@@ -2,19 +2,27 @@ import styles from "../styles/Home.module.css";
 
 import React from 'react';
 import ActivityForm from '../components/activityForm';
-import {getSession} from 'next-auth/react';
+import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
-export default function newActivity({notSession}) {
+export default function newActivity() {
     const router = useRouter();
 
-    if (!notSession) {
-        router.push('/');
-    } else if (notSession.user.role === 4) {
-        router.push('/');
-    }
+    const {data: session} = useSession();
 
+
+    if (session === undefined) {
+        return '';
+    }else if (session === null) {
+        router.push('/');
+        return '';
+    }else if (session.user.role === 4) {
+        router.push('/');
+        return '';
+    }
     return (
         <div className={styles.wrapper}>
             <ActivityForm/>
@@ -25,7 +33,11 @@ export default function newActivity({notSession}) {
 export async function getServerSideProps(context) {
     return {
         props: {
-            notSession: await getSession(context)
-        }
+            session: await getServerSession(
+                context.req,
+                context.res,
+                authOptions
+            ),
+        },
     }
 }

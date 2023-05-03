@@ -12,6 +12,9 @@ import {getSession, useSession} from "next-auth/react";
 
 export default function Overview({notSession}) {
 
+    const {data: session, status} = useSession();
+
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -26,8 +29,7 @@ export default function Overview({notSession}) {
                         <PayrollCard/>
                     </div>
                 </div>
-
-                <AddProject url={"/newProject"} name={"Projekt"} useId={false}/>
+                {(session.user.role === 1 || session.user.role === 2) && <AddProject url={"/newProject"} name={"Projekt"} useId={false}/>}
             </div>
         </>
     )

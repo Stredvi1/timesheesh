@@ -10,10 +10,7 @@ export default function ProjectDetails() {
         <>
             <div className={styles.wrapper}>
                 <Details/>
-
-
                    <Activities/>
-
                 <AddActivity url={"/newActivity"} name={"Aktivitu"} useId={true}/>
 
             </div>

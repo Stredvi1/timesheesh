@@ -16,17 +16,12 @@ export default function newUser() {
     //if is session undefined -> that means loading
     if (session === undefined) {
         return '';
-    }
-
-    //null is empty session (user is not authenticated)
-    if (session === null) {
+    }else if (session === null) {
+        //null is empty session (user is not authenticated)
         router.push('/');
         //there must be a return els it will continue
         return '';
-    }
-
-    if (session.user.role !== 1) {
-        //todo kick him!
+    }else if (session.user.role !== 1) {
         router.push('/');
         return '';
     }
@@ -37,20 +32,10 @@ export default function newUser() {
         </div>
     );
 
-    /*if (!notSession) {
-        router.push('/')
-    } else if (notSession.user.role === 2 || notSession.user.role === 3 || notSession.user.role === 4) {
-        router.push('/')
-    } else if(notSession.user.role === 1){
-        return (
-            <div className={styles.wrapper}>
-                <RegistrationForm/>
-            </div>
-        );
-    }*/
+
 }
 
-/*export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
     return {
         props: {
             session: await getServerSession(
@@ -60,4 +45,4 @@ export default function newUser() {
             ),
         },
     }
-}*/
+}

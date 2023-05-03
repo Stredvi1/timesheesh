@@ -8,14 +8,11 @@ import Link from "next/link";
 import {IconButton, Stack} from "@mui/material";
 import {useRouter} from "next/router";
 import {signOut} from "next-auth/react";
-import {getSession} from 'next-auth/react';
 import {useSession} from "next-auth/react"
-import {getServerSession} from "next-auth";
-//import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {Conditional} from '@/utils/Conditional';
 
 
-export default function ButtonAppBar({notSession}) {
+export default function ButtonAppBar() {
     const router = useRouter();
 
     const {data: session, status} = useSession();
@@ -74,9 +71,9 @@ export default function ButtonAppBar({notSession}) {
                             </Conditional>
 
                         </Stack>
-                        <Link href='/newUser'>
+                        {session.user.role === 1 && <Link href='/newUser'>
                             <Button color="inherit">Přidat uživatele</Button>
-                        </Link>
+                        </Link>}
                         <Button
                             color="inherit"
                             onClick={() => signOut({callbackUrl: `/`})}
