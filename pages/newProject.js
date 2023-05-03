@@ -12,7 +12,7 @@ export default function newProject() {
     const router = useRouter();
 
     const {data: session} = useSession();
-    
+
     if (session === undefined) {
         return '';
     }else if (session === null) {
