@@ -55,7 +55,9 @@ export default function load() {
                                 <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
 
                             </Box>
-                            <Progress value={percentage(project.budget, project.amount)} size={5}/>
+                            <Box>
+                                <Progress value={percentage(project.budget, project.amount)} size={"10rem"} color={"contrast"}/>
+                            </Box>
                         </Stack>
 
                     )

@@ -70,7 +70,7 @@ export default function ButtonAppBar() {
                             </Conditional>
 
                         </Stack>
-                        {session.user.role === 1 && <Link href='/pages/newUser'>
+                        {session.user.role === 1 && <Link href='/newUser'>
                             <Button color="inherit">Přidat uživatele</Button>
                         </Link>}
                         <Button
