@@ -4,9 +4,13 @@ import styles from "../../styles/Home.module.css";
 import AddRecord from "/components/recordForm";
 import {Stack} from "@mui/material";
 import Records from "../../loaders/loadRecords";
+import {useSession} from "next-auth/react";
 
 
 export default function Activity() {
+
+    const {data: session, status} = useSession();
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -15,9 +19,9 @@ export default function Activity() {
                     <Stack flexWrap spacing={4} sx={{p: 6, width: '100%'}} direction="row">
                         <Records/>
                     </Stack>
-                    <div style={{width: 'fit-content', right: 0, position: "fixed"}}>
+                    {session.user.role !== 4 && <div style={{width: 'fit-content', right: 0, position: "fixed"}}>
                         <AddRecord/>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </>
