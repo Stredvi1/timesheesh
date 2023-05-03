@@ -1,14 +1,14 @@
 import styles from "../styles/Home.module.css";
 
 import RegistrationForm from '../components/registrationForm';
-import {getSession, useSession} from 'next-auth/react';
+import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
-import {redirect} from "next/navigation";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
 export default function newUser() {
+    return '';
     const router = useRouter();
 
     const {data: session} = useSession();
@@ -22,13 +22,14 @@ export default function newUser() {
     if (session === null) {
         router.push('/');
         //there must be a return els it will continue
-        return 'not permitted to see dings bums';
+        return '';
     }
 
-    /*if (session.user.role !== 3) {
+    if (session.user.role !== 1) {
         //todo kick him!
-        return 'no';
-    }*/
+        router.push('/');
+        return '';
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -49,7 +50,7 @@ export default function newUser() {
     }*/
 }
 
-export async function getServerSideProps(context) {
+/*export async function getServerSideProps(context) {
     return {
         props: {
             session: await getServerSession(
@@ -59,4 +60,4 @@ export async function getServerSideProps(context) {
             ),
         },
     }
-}
+}*/

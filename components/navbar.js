@@ -11,13 +11,13 @@ import {signOut} from "next-auth/react";
 import {getSession} from 'next-auth/react';
 import {useSession} from "next-auth/react"
 import {getServerSession} from "next-auth";
-import {authOptions} from "@/pages/api/auth/[...nextauth]";
+//import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
 export default function ButtonAppBar({notSession}) {
     const router = useRouter();
 
-    const { data: session, status } = useSession()
+    const {data: session, status} = useSession();
 
 
     function home() {
@@ -29,7 +29,7 @@ export default function ButtonAppBar({notSession}) {
     function back() {
         router.back();
     }
-    console.log(status)
+
     if (status === "authenticated") {
         return (
             <Box sx={{flexGrow: 1}}>
@@ -84,16 +84,4 @@ export default function ButtonAppBar({notSession}) {
         );
     }
 
-}
-
-export async function getServerSideProps(context) {
-    return {
-        props: {
-            session: await getServerSession(
-                context.req,
-                context.res,
-                authOptions
-            ),
-        },
-    }
 }
