@@ -2,9 +2,9 @@
 import {useFormik} from "formik";
 import {Button, Stack, TextField, Paper, Box, Alert, AlertTitle, Snackbar, IconButton, Typography} from "@mui/material";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {ProjectScheme} from "./Schemes/projectScheme";
+import {ProjectScheme} from "./schemas/projectScheme";
 import React from "react";
-import addProject from "../posters/postNewProject";
+import addProject from "../../posters/postNewProject";
 import {useRouter} from "next/router";
 import dayjs from 'dayjs';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";

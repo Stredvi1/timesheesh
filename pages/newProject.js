@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.css";
 
 import React from 'react';
-import ProjectForm from '../components/projectForm';
+import ProjectForm from '../components/forms/projectForm';
 import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 import {getServerSession} from "next-auth";

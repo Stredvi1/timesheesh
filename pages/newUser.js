@@ -1,6 +1,6 @@
 import styles from "../styles/Home.module.css";
 
-import RegistrationForm from '../components/registrationForm';
+import RegistrationForm from '../components/forms/registrationForm';
 import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/navigation';
 import {getServerSession} from "next-auth";

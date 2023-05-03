@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {Typography, Box} from "@mui/material";
 import styles from "../styles/Home.module.css";
-import currency from "../formatters/currencyFormatter";
-import time from "../formatters/worktimeFormatter";
+import currency from "../utils/formatters/currencyFormatter";
+import time from "../utils/formatters/worktimeFormatter";
 
 
 export default function load() {

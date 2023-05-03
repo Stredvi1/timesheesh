@@ -13,10 +13,10 @@ import {
     AlertTitle, Snackbar
 } from "@mui/material";
 import React from "react";
-import {ActivityScheme} from "./Schemes/activityScheme";
-import Workers from "../loaders/loadWorkers";
-import HourRates from "../loaders/loadHourRates";
-import addActivity from "../posters/postNewActivity";
+import {ActivityScheme} from "./schemas/activityScheme";
+import Workers from "../../loaders/loadWorkers";
+import HourRates from "../../loaders/loadHourRates";
+import addActivity from "../../posters/postNewActivity";
 import {useRouter} from "next/router";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 import {useSearchParams} from "next/navigation";

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Card from "../components/recordCard";
+import Card from "../components/cards/recordCard";
 import NoRecord from "../components/nothingHereText";
 
 

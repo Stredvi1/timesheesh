@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Project from "../components/projectCard";
+import Project from "../components/cards/projectCard";
 
 
 export default function test() {

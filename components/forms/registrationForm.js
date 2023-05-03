@@ -17,9 +17,9 @@ import {
     AlertTitle, Snackbar
 } from "@mui/material";
 import React from "react";
-import {RegistrationSchema} from "./Schemes/registrationSchema";
-import UserTypes from "../loaders/loadUserType";
-import addUser from "../posters/postNewUser";
+import {RegistrationSchema} from "./schemas/registrationSchema";
+import UserTypes from "../../loaders/loadUserType";
+import addUser from "../../posters/postNewUser";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";

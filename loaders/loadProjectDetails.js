@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {Typography, Box} from "@mui/material";
+import {Typography, Box, Stack} from "@mui/material";
 import styles from "../styles/Home.module.css";
-import date from "../formatters/dateTimeFormatter";
-import currency from "../formatters/currencyFormatter";
+import date from "../utils/formatters/dateTimeFormatter";
+import currency from "../utils/formatters/currencyFormatter";
+import Progress from '@/components/progressCircle';
+import percentage from "@/utils/percentage";
 
 
 export default function load() {
@@ -42,15 +44,20 @@ export default function load() {
             {dataResponse?.map((project) => {
                     return (
 
-                        <Box className={styles.upperBox} key={project.id}>
+                        <Stack
+                        direction={"row"}
+                        className={styles.upperBox} key={project.id}>
+                            <Box>
 
-                            <Typography variant="h3">{project.name}</Typography>
-                            <Typography>{project.note}</Typography>
-                            <Typography><strong>Budget: </strong>{currency(project.budget)}</Typography>
-                            <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
+                                <Typography variant="h3">{project.name}</Typography>
+                                <Typography>{project.note}</Typography>
+                                <Typography><strong>Budget: </strong>{currency(project.budget)}</Typography>
+                                <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
 
+                            </Box>
+                            <Progress value={percentage(project.budget, project.amount)} size={5}/>
+                        </Stack>
 
-                        </Box>
                     )
                 }
             )}

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Card from "../components/activityCard";
-import time from "../formatters/worktimeFormatter";
+import Card from "../components/cards/activityCard";
+import time from "../utils/formatters/worktimeFormatter";
 import {Stack, Typography} from "@mui/material";
 import NoActivity from "../components/nothingHereText";
 

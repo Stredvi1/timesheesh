@@ -3,10 +3,10 @@ import {useFormik} from "formik";
 import {
     Stack, Paper, Box, Typography, TextField, Button, AlertTitle, Snackbar, Alert, IconButton
 } from "@mui/material";
-import {RecordScheme} from "./Schemes/recordScheme";
+import {RecordScheme} from "./schemas/recordScheme";
 import React from "react";
 import {useRouter} from "next/router";
-import addRecord from "../posters/postNewRecord";
+import addRecord from "../../posters/postNewRecord";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateField} from "@mui/x-date-pickers";

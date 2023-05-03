@@ -1,7 +1,7 @@
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import {Box, Button, Typography} from "@mui/material";
-import time from "../formatters/worktimeFormatter";
+import time from "../../utils/formatters/worktimeFormatter";
 import Link from "next/link";
 
 

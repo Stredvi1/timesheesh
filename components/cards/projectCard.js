@@ -1,10 +1,11 @@
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import {Box, Button, Stack, Typography} from "@mui/material";
-import currency from "../formatters/currencyFormatter";
-import date from "../formatters/dateTimeFormatter";
+import currency from "../../utils/formatters/currencyFormatter";
+import date from "../../utils/formatters/dateTimeFormatter";
 import Link from "next/link";
-import Progress from "../components/progressCircle"
+import Progress from "../progressCircle"
+import percentage from '@/utils/percentage';
 
 
 export default function ProjectCard(project) {
@@ -16,9 +17,6 @@ export default function ProjectCard(project) {
         width: '20%',
     }));
 
-    function countPercentage(maxVal, curVal) {
-        return curVal / (maxVal / 100);
-    }
 
     return (
         <ProjectCard>
@@ -39,7 +37,7 @@ export default function ProjectCard(project) {
                         right: 20,
                         position: "absolute"
                     }}>
-                    <Progress value={countPercentage(project.budget, project.amount)}/>
+                    <Progress value={percentage(project.budget, project.amount)} size={5}/>
                 </Box>
             </Stack>
             <Link href={`/project/${project.id}`}>

@@ -5,8 +5,10 @@ import {Typography, Box, Stack} from '@mui/material';
 
 import Projects from "../loaders/loadProjects";
 import AddProject from "../components/addButton";
-import PayrollCard from "../components/payrollCard";
-import {useSession} from "next-auth/react";
+import PayrollCard from "../components/cards/payrollCard";
+import {getSession, useSession} from "next-auth/react";
+
+
 
 export default function Overview() {
 

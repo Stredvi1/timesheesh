@@ -1,8 +1,8 @@
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import {Typography} from "@mui/material";
-import date from "../formatters/dateTimeFormatter";
-import time from "../formatters/worktimeFormatter";
+import date from "../../utils/formatters/dateTimeFormatter";
+import time from "../../utils/formatters/worktimeFormatter";
 
 
 export default function RecordCard(record) {

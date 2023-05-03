@@ -5,7 +5,7 @@ import {Stack, Paper, Box, Typography, TextField, InputLabel, Select, MenuItem, 
 import React from "react";
 import {useRouter} from "next/router";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
-import {LoginScheme} from "./Schemes/loginScheme";
+import {LoginScheme} from "./schemas/loginScheme";
 import {signIn} from "next-auth/react";
 
 

@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Card from "../components/recordCard";
+import Card from "../components/cards/recordCard";
 import {useSession} from "next-auth/react";
 import {Typography} from "@mui/material";
-import currency from "../formatters/currencyFormatter";
-import time from "../formatters/worktimeFormatter";
+import currency from "../utils/formatters/currencyFormatter";
+import time from "../utils/formatters/worktimeFormatter";
 
 
 export default function load() {
