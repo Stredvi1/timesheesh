@@ -22,13 +22,14 @@ export default function newUser() {
     if (session === null) {
         router.push('/');
         //there must be a return els it will continue
-        return 'not permitted to see dings bums';
+        return '';
     }
 
-    /*if (session.user.role !== 3) {
+    if (session.user.role !== 1) {
         //todo kick him!
-        return 'no';
-    }*/
+        router.push('/');
+        return '';
+    }
 
     return (
         <div className={styles.wrapper}>

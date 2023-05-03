@@ -17,7 +17,7 @@ import {getServerSession} from "next-auth";
 export default function ButtonAppBar({notSession}) {
     const router = useRouter();
 
-    const { data: session, status } = useSession()
+    const {data: session, status} = useSession();
 
 
     function home() {
@@ -29,7 +29,7 @@ export default function ButtonAppBar({notSession}) {
     function back() {
         router.back();
     }
-    console.log(status)
+
     if (status === "authenticated") {
         return (
             <Box sx={{flexGrow: 1}}>
