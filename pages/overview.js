@@ -5,8 +5,9 @@ import {Typography, Box, Stack} from '@mui/material';
 
 import Projects from "../loaders/loadProjects";
 import AddProject from "../components/addButton";
-import PayrollCard from "../components/cards/payrollCard";
-import {getSession, useSession} from "next-auth/react";
+import Payroll from "@/loaders/loadPayroll";
+import {useSession} from "next-auth/react";
+import {Conditional} from "@/utils/Conditional";
 
 
 
@@ -25,7 +26,9 @@ export default function Overview() {
                         <Projects/>
                     </Stack>
                     <div style={{width: 'fit-content', right: 0, position: "fixed"}}>
-                        <PayrollCard/>
+                        <Conditional showWhen={status === "authenticated"}>
+                            <Payroll/>
+                        </Conditional>
                     </div>
                 </div>
                 {(session?.user.role === 1 || session?.user.role === 2) && <AddProject url={"/newProject"} name={"Projekt"} useId={false}/>}

@@ -1,7 +1,5 @@
 import { query } from "./db";
 
-
-
 export default async function handler(req, res) {
     try {
 
@@ -11,6 +9,7 @@ export default async function handler(req, res) {
         const data = await query({query: querySQL, values: valueParams });
 
         res.status(200).json({payroll: data});
+
 
     } catch (error) {
         res.status(500).json({error: error.message});

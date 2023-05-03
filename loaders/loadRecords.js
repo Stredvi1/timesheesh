@@ -32,8 +32,6 @@ export default function load() {
             setDataResponse(res.records);
         }
 
-        console.log("Record ", id);
-
         getPageData();
     }, [id, router.isReady]);
 

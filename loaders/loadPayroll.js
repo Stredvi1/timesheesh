@@ -1,26 +1,24 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Card from "../components/cards/recordCard";
+import Card from "../components/cards/payrollCard";
 import {useSession} from "next-auth/react";
 import {Typography} from "@mui/material";
 import currency from "../utils/formatters/currencyFormatter";
 import time from "../utils/formatters/worktimeFormatter";
+import NoPayroll from "@/components/nothingHereText";
+import {console} from "next/dist/compiled/@edge-runtime/primitives/console";
 
 
 export default function load() {
 
     const [dataResponse, setDataResponse] = useState([]);
-    const {data: session} = useSession();
 
-    // const id = session.id;
-    //TODO: edit
-    const id = 29;
+    const {data: session, status} = useSession();
+
+    const id = session?.user.id;
+    console.log(155, id)
 
     useEffect(() => {
-        if (!router.isReady) {
-            return;
-        }
-
         async function getPageData() {
             const apiUrlEndpoint = `/api/getPayroll`;
             const postData = {
@@ -31,23 +29,41 @@ export default function load() {
                 })
             }
             const response = await fetch(apiUrlEndpoint, postData);
-            const res = await response.json();
 
-            setDataResponse(res.payroll);
+            if (response.ok) {
+                const res = await response.json();
+                setDataResponse(res.payroll);
+                console.log(1, res.payroll);
+            }
+
         }
 
-        getPageData();
-    }, [id, router.isReady]);
-    return (
-        <>
-            {dataResponse?.map((payroll) => (
-                    <>
-                        <Typography><strong>{payroll.fullName}</strong></Typography>
-                        <Typography><strong>Částka: </strong>{currency(payroll.amount)}</Typography>
-                        <Typography><strong>Bankovní účet: </strong>{payroll.bankAccount}</Typography>
-                    </>
-                )
-            )}
-        </>
-    )
+        getPageData().catch();
+    }, []);
+
+    if (dataResponse.length === 0) {
+        return (
+            <>
+                <NoPayroll text={"výplatu"}/>
+            </>
+        )
+    } else {
+        return (
+            <>
+                {dataResponse?.map((payroll) => {
+                        return (
+                            <Card
+                                key={payroll.tUserID}
+                                id={payroll.tUserID}
+                                name={payroll.fullName}
+                                amount={payroll.amount}
+                                bankAccount={payroll.bankAccount}
+                            />
+                        )
+                    }
+                )}
+            </>
+        )
+    }
+
 }

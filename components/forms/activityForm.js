@@ -28,7 +28,6 @@ export default function ActivityForm() {
     const router = useRouter();
     const search = useSearchParams();
     const id = search.get('id');
-    console.log(id);
 
     const formik = useFormik({
         initialValues: {
@@ -49,7 +48,6 @@ export default function ActivityForm() {
 
         values.projectID = parseInt(id);
         values.timeFund = parseFloat(values.timeFund);
-        console.log(values)
 
         const res = await addActivity(values);
 

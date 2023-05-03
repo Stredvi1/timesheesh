@@ -1,4 +1,4 @@
-export default function formatWorkTime(amount) {
+export default function formatCurrency(amount) {
     const formattedAmount = Number(amount).toLocaleString('cs-CZ');
     const currencySymbol = 'Kč';
 
