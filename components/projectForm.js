@@ -11,12 +11,14 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateField} from "@mui/x-date-pickers";
 import {CloseIcon} from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
 import Link from "next/link";
+import {useSession} from "next-auth/react";
 
 
 export default function ProjectForm() {
 
     const [error, setError] = React.useState(false);
     const router = useRouter();
+    const session = useSession();
 
     const formik = useFormik({
         initialValues: {
@@ -32,10 +34,11 @@ export default function ProjectForm() {
     });
 
     async function handleSubmit(values) {
+        values.userID = session.data.user.id;
         const res = await addProject(values);
 
         if (res) {
-            await router.push("/overview")
+            await router.back();
         } else {
             setError(true);
         }
