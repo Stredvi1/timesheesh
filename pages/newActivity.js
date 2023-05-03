@@ -7,12 +7,12 @@ import {useRouter} from 'next/navigation';
 
 
 export default function newActivity({notSession}) {
-    const router = useRouter()
+    const router = useRouter();
 
     if (!notSession) {
-        router.push('/')
+        router.push('/');
     } else if (notSession.user.role === 4) {
-        router.push('/')
+        router.push('/');
     }
 
     return (

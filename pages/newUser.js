@@ -8,7 +8,7 @@ import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
 export default function newUser() {
-    return '';
+
     const router = useRouter();
 
     const {data: session} = useSession();

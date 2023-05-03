@@ -12,6 +12,7 @@ import {getSession} from 'next-auth/react';
 import {useSession} from "next-auth/react"
 import {getServerSession} from "next-auth";
 //import {authOptions} from "@/pages/api/auth/[...nextauth]";
+import {Conditional} from '@/utils/Conditional';
 
 
 export default function ButtonAppBar({notSession}) {
@@ -21,9 +22,7 @@ export default function ButtonAppBar({notSession}) {
 
 
     function home() {
-        if (router.pathname !== "/overview") {
-            router.push("/overview");
-        }
+        router.push("/overview");
     }
 
     function back() {
@@ -47,28 +46,33 @@ export default function ButtonAppBar({notSession}) {
                                     TimeShift
                                 </Typography>
                             </Box>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{mr: 2}}
-                                onClick={() => {
-                                    back();
-                                }}>
-                                <ArrowBack/>
-                            </IconButton>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{mr: 2}}
-                                onClick={() => {
-                                    home();
-                                }}>
-                                <HomeOutlined/>
-                            </IconButton>
+                            <Conditional showWhen={router.pathname !== '/overview'}>
+
+                                <IconButton
+                                    size="large"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    sx={{mr: 2}}
+                                    onClick={() => {
+                                        back();
+                                    }}>
+                                    <ArrowBack/>
+                                </IconButton>
+                                <IconButton
+                                    size="large"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="menu"
+                                    sx={{mr: 2}}
+                                    onClick={() => {
+                                        home();
+                                    }}>
+                                    <HomeOutlined/>
+                                </IconButton>
+
+                            </Conditional>
+
                         </Stack>
                         <Link href='/newUser'>
                             <Button color="inherit">Přidat uživatele</Button>
