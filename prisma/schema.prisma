@@ -237,6 +237,7 @@ view currentpayrols {
 
 /// The underlying view does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 view projectsdetails {
+  userID     Int?     @default(0)
   id         Int      @default(0)
   name       String   @db.VarChar(40)
   budget     Float

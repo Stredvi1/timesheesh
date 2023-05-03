@@ -1,7 +1,6 @@
 import Navbar from './navbar';
 import Footer from './footer';
 import Head from 'next/head';
-import { SessionProvider } from "next-auth/react"
 
 export default function Layout({children, session}) {
     return (
@@ -12,10 +11,9 @@ export default function Layout({children, session}) {
                     <link rel="icon" href="/favicon.ico"/>
                 </Head>
 
-                <Navbar/>
-                <main>{children}</main>
-                <Footer/>
-            </SessionProvider>
+            <Navbar/>
+            <main>{children}</main>
+            <Footer/>
 
 
             <style jsx>{`

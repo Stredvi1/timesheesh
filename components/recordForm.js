@@ -20,7 +20,6 @@ export default function NewRecord() {
     const [disabled, setDisabled] = React.useState(false);
     const router = useRouter();
     const {activityId} = router.query;
-    const session = useSession();
 
     const formik = useFormik({
         initialValues: {
