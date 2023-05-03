@@ -2,14 +2,13 @@ import Navbar from './navbar';
 import Footer from './footer';
 import Head from 'next/head';
 
-export default function Layout({children, session}) {
+export default function Layout({children}) {
     return (
         <>
-            <SessionProvider session={session}>
-                <Head>
-                    <title>TimeShift</title>
-                    <link rel="icon" href="/favicon.ico"/>
-                </Head>
+            <Head>
+                <title>TimeShift</title>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
 
             <Navbar/>
             <main>{children}</main>

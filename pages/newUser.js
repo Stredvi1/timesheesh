@@ -8,8 +8,33 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 
-export default function newUser({notSession}) {
-    const router = useRouter()
+export default function newUser() {
+    const router = useRouter();
+
+    const {data: session} = useSession();
+
+    //if is session undefined -> that means loading
+    if (session === undefined) {
+        return '';
+    }
+
+    //null is empty session (user is not authenticated)
+    if (session === null) {
+        router.push('/');
+        //there must be a return els it will continue
+        return 'not permitted to see dings bums';
+    }
+
+    /*if (session.user.role !== 3) {
+        //todo kick him!
+        return 'no';
+    }*/
+
+    return (
+        <div className={styles.wrapper}>
+            <RegistrationForm/>
+        </div>
+    );
 
     /*if (!notSession) {
         router.push('/')
@@ -27,7 +52,11 @@ export default function newUser({notSession}) {
 export async function getServerSideProps(context) {
     return {
         props: {
-            notSession: await getSession(context)
-        }
+            session: await getServerSession(
+                context.req,
+                context.res,
+                authOptions
+            ),
+        },
     }
 }

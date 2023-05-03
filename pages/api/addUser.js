@@ -1,5 +1,7 @@
 import {query} from "./db";
 import {hash} from "bcrypt";
+import * as Yup from "yup";
+import prisma from "@/lib/prisma";
 
 export default async function handler(req, res) {
     const RegistrationSchema = Yup.object().shape({
@@ -75,8 +77,8 @@ export default async function handler(req, res) {
         res.status(201).json({success: true});
 
     } catch (error) {
-        console.log(error)
-        res.status(500).json({error: error.message});
+        console.log(43, error)
+        res.status(500).json({error: error.meta.message});
     }
 }
 
