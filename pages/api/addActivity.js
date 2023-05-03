@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         const valueParams = [
             validData.activityName,
             validData.timeFund,
-            validData.worker,
+            validData.userID,
             validData.hourRate,
             validData.projectID,
             validData.note];

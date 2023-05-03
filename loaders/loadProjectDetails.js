@@ -46,17 +46,27 @@ export default function load() {
 
                         <Stack
                         direction={"row"}
-                        className={styles.upperBox} key={project.id}>
+                        className={styles.upperBox}
+                        key={project.id}
+                        alignItems={"center"}
+                        sx={{
+                            position: 'relative'
+                        }}>
                             <Box>
 
                                 <Typography variant="h3">{project.name}</Typography>
-                                <Typography>{project.note}</Typography>
                                 <Typography><strong>Budget: </strong>{currency(project.budget)}</Typography>
+                                <Typography><strong>Odpracováno: </strong>{currency(project.amount)}</Typography>
                                 <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
+                                <Typography><i>{project.note}</i></Typography>
 
                             </Box>
-                            <Box>
-                                <Progress value={percentage(project.budget, project.amount)} size={"10rem"} color={"primary"}/>
+                            <Box
+                            sx={{
+                                position: 'absolute',
+                                right: '5rem'
+                            }}>
+                                <Progress value={percentage(project.budget, project.amount)} size={"10rem"} color={"primary"} textColor={"text.contrast"}/>
                             </Box>
                         </Stack>
 

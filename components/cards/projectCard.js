@@ -37,7 +37,7 @@ export default function ProjectCard(project) {
                         right: 20,
                         position: "absolute"
                     }}>
-                    <Progress value={percentage(project.budget, project.amount)} size={"5rem"} color={"secondary"}/>
+                    <Progress value={percentage(project.budget, project.amount)} size={"5rem"} color={"secondary"} textColor={"primary"}/>
                 </Box>
             </Stack>
             <Link href={`/project/${project.id}`}>
