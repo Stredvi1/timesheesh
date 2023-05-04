@@ -52,74 +52,80 @@ export default function NewRecord() {
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit}>
-                <Stack direction="column"
-                       spacing={6}
-                       justifyContent="center"
-                       alignItems="center"
-                       margin={4}
-                >
-                    <Paper elevation={3}>
-                        <Box padding={2}>
-                            <Stack
-                                direction="column"
-                                spacing={3}
-                                justifyContent="center"
-                                alignItems="center"
-                                margin={4}
-                                sx={{
-                                    width: 300,
-                                    maxWidth: '100%',
-                                }}
-                            >
-                                <Typography variant="h4">Vytvoření výkazu</Typography>
+            <Box sx={{
+                right: '1rem',
+                m: '1rem'
+            }}>
+                <form onSubmit={formik.handleSubmit}>
+                    <Stack direction="column"
+                           spacing={6}
+                           justifyContent="center"
+                           alignItems="center"
+                           margin={4}
+                    >
+                        <Paper elevation={3}>
+                            <Box padding={2}>
+                                <Stack
+                                    direction="column"
+                                    spacing={3}
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    margin={4}
+                                    sx={{
+                                        width: 300,
+                                        maxWidth: '100%',
+                                    }}
+                                >
+                                    <Typography variant="h4">Vytvoření výkazu</Typography>
 
-                                <TextField
-                                    fullWidth
-                                    id="workingTime"
-                                    label="Odpracovaný čas"
-                                    placeholder="0.00"
-                                    required
-                                    variant="outlined"
-                                    {...formik.getFieldProps('workingTime')}
-                                    error={formik.touched.workingTime && Boolean(formik.errors.workingTime)}
-                                    helperText={formik.touched.workingTime && formik.errors.workingTime}/>
-
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DateField
+                                    <TextField
                                         fullWidth
-                                        id="date"
-                                        label="Datum"
+                                        id="workingTime"
+                                        label="Odpracovaný čas"
+                                        placeholder="0.00"
                                         required
                                         variant="outlined"
-                                        format="DD-MM-YYYY hh:mm"
-                                        onChange={(value) => {
-                                            formik.setFieldValue('date', dayjs(value).format("YYYY-MM-DD hh:mm:ss"));
-                                        }}
-                                        error={formik.touched.date && Boolean(formik.errors.date)}
-                                        helperText={formik.touched.date && formik.errors.date}
+                                        {...formik.getFieldProps('workingTime')}
+                                        error={formik.touched.workingTime && Boolean(formik.errors.workingTime)}
+                                        helperText={formik.touched.workingTime && formik.errors.workingTime}/>
+
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DateField
+                                            fullWidth
+                                            id="date"
+                                            label="Datum"
+                                            required
+                                            variant="outlined"
+                                            format="DD-MM-YYYY hh:mm"
+                                            onChange={(value) => {
+                                                formik.setFieldValue('date', dayjs(value).format("YYYY-MM-DD hh:mm:ss"));
+                                            }}
+                                            error={formik.touched.date && Boolean(formik.errors.date)}
+                                            helperText={formik.touched.date && formik.errors.date}
+                                        />
+                                    </LocalizationProvider>
+
+                                    <TextField
+                                        fullWidth
+                                        id="description"
+                                        label="Popis"
+                                        required
+                                        variant="outlined"
+                                        multiline
+                                        rows={4}
+                                        {...formik.getFieldProps('description')}
+                                        error={formik.touched.description && Boolean(formik.errors.description)}
+                                        helperText={formik.touched.description && formik.errors.description}
                                     />
-                                </LocalizationProvider>
 
-                                <TextField
-                                    fullWidth
-                                    id="description"
-                                    label="Popis"
-                                    required
-                                    variant="outlined"
-                                    multiline
-                                    rows={4}
-                                    {...formik.getFieldProps('description')}
-                                    error={formik.touched.description && Boolean(formik.errors.description)}
-                                    helperText={formik.touched.description && formik.errors.description}
-                                />
-
-                                <Button variant="contained" type="submit" disabled={disabled}>Vytvořit výkaz</Button>
-                            </Stack>
-                        </Box>
-                    </Paper>
-                </Stack>
-            </form>
+                                    <Button variant="contained" type="submit" disabled={disabled}>Vytvořit
+                                        výkaz</Button>
+                                </Stack>
+                            </Box>
+                        </Paper>
+                    </Stack>
+                </form>
+            </Box>
 
             <Snackbar
                 open={error}
@@ -137,10 +143,10 @@ export default function NewRecord() {
                                 setError(false);
                             }}
                         >
-                            <CloseIcon fontSize="inherit" />
+                            <CloseIcon fontSize="inherit"/>
                         </IconButton>
                     }
-                    sx={{ mb: 2 }}
+                    sx={{mb: 2}}
                 >
                     <AlertTitle>Chyba</AlertTitle>
                     Nastala neočekávaná chyba v databázi

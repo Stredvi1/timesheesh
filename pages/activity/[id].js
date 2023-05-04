@@ -5,6 +5,7 @@ import AddRecord from "/components/forms/recordForm";
 import {Stack} from "@mui/material";
 import Records from "../../loaders/loadRecords";
 import {useSession} from "next-auth/react";
+import {Conditional} from "@/utils/Conditional";
 
 
 export default function Activity() {
@@ -15,14 +16,15 @@ export default function Activity() {
         <>
             <div className={styles.wrapper}>
                 <Details/>
-                <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
-                    <Stack flexWrap spacing={4} sx={{p: 6, width: '100%'}} direction="row">
-                        <Records/>
-                    </Stack>
-                    {session?.user.role !== 4 && <div style={{width: 'fit-content', right: 0, position: "fixed"}}>
+                <Stack
+                    direction={"row"}>
+                    <Records/>
+
+                    <Conditional showWhen={session?.user.role !== 4}>
                         <AddRecord/>
-                    </div>}
-                </div>
+                    </Conditional>
+
+                </Stack>
             </div>
         </>
     )

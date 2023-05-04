@@ -21,16 +21,15 @@ export default function Overview() {
                 <Box className={styles.upperBox}>
                     <Typography variant="h3">Vítejte, {session?.user.name}</Typography>
                 </Box>
-                <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
-                    <Stack flexWrap spacing={4} sx={{p: 6, width: '100%'}} direction="row">
+               <Stack
+               direction={"row"}>
+
                         <Projects/>
-                    </Stack>
-                    <div style={{width: 'fit-content', right: 0, position: "fixed"}}>
-                        <Conditional showWhen={status === "authenticated"}>
-                            <Payroll/>
-                        </Conditional>
-                    </div>
-                </div>
+
+                   <Conditional showWhen={status === "authenticated"}>
+                       <Payroll/>
+                   </Conditional>
+               </Stack>
                 {(session?.user.role === 1 || session?.user.role === 2) && <AddProject url={"/newProject"} name={"Projekt"} useId={false}/>}
             </div>
         </>

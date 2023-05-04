@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Card from "../components/cards/payrollCard";
 import {useSession} from "next-auth/react";
-import {Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import currency from "../utils/formatters/currencyFormatter";
 import time from "../utils/formatters/worktimeFormatter";
 import NoPayroll from "@/components/nothingHereText";
@@ -50,6 +50,11 @@ export default function load() {
     } else {
         return (
             <>
+                <Box
+                width={"20%"}
+                sx={{
+                    m:'2rem'
+                }}>
                 {dataResponse?.map((payroll) => {
                         return (
                             <Card
@@ -62,6 +67,7 @@ export default function load() {
                         )
                     }
                 )}
+                </Box>
             </>
         )
     }

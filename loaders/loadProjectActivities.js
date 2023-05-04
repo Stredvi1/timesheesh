@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Card from "../components/cards/activityCard";
 import time from "../utils/formatters/worktimeFormatter";
-import {Stack, Typography} from "@mui/material";
+import {Grid, Stack, Typography} from "@mui/material";
 import NoActivity from "../components/nothingHereText";
 
 
@@ -39,29 +39,38 @@ export default function load() {
     if (dataResponse.length === 0) {
         return (
             <>
-            <NoActivity text={"aktivitu"}/>
+                <NoActivity text={"aktivitu"}/>
             </>
         )
     } else {
         return (
             <>
-                <Stack flexWrap spacing={4} sx={{p: 6}} direction="row">
+                <Grid
+                    container
+                    spacing={5}
+                    direction={"row"}
+                    alignItems="center"
+                    columns={{xs: 8, md: 8}}
+                    sx={{
+                        m: '0.8rem'
+                    }}>
                     {dataResponse?.map((activity) => {
                             return (
-
-                                <Card
-                                    key={activity.id}
-                                    id={activity.id}
-                                    projectID={activity.projectID}
-                                    name={activity.name}
-                                    timefund={activity.timefund}
-                                    workingTime={activity.workingTime}
-                                    fullName={activity.fullName}
-                                />
+                                <Grid item xs={3.8}>
+                                    <Card
+                                        key={activity.id}
+                                        id={activity.id}
+                                        projectID={activity.projectID}
+                                        name={activity.name}
+                                        timefund={activity.timefund}
+                                        workingTime={activity.workingTime}
+                                        fullName={activity.fullName}
+                                    />
+                                </Grid>
                             )
                         }
                     )}
-                </Stack>
+                </Grid>
             </>
         )
     }

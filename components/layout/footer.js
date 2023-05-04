@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <Typography variant="body1"><strong>Powered by</strong> Vašek a Vito</Typography>
+        <Typography variant="body1">TimeSheet | <strong>Powered by</strong> Vašek a Vito</Typography>
       </footer>
 
       <style jsx>{`
@@ -15,6 +15,7 @@ export default function Footer() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          min-height: 100%;
         }
 
         footer {
@@ -25,8 +26,9 @@ export default function Footer() {
           display: flex;
           justify-content: center;
           align-items: center;
-          position: fixed;
+          z-index: -1;
           bottom: 0;
+          
         }
       `}</style>
     </>

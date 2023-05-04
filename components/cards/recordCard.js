@@ -11,8 +11,7 @@ export default function RecordCard(record) {
         ...theme.typography.body1,
         padding: theme.spacing(4),
         color: theme.palette.text.contrastText,
-        width: 'fit-content',
-        height: 'fit-content',
+        width: '100%',
     }));
 
     return (

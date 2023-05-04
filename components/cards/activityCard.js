@@ -13,7 +13,6 @@ export default function ActivityCard(activity) {
         ...theme.typography.body1,
         padding: theme.spacing(4),
         color: theme.palette.text.contrastText,
-        width: '20%',
     }));
 
     return (

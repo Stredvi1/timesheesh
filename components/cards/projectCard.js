@@ -14,7 +14,7 @@ export default function ProjectCard(project) {
         ...theme.typography.body1,
         padding: theme.spacing(4),
         color: theme.palette.text.contrastText,
-        width: '20%',
+        height: "100%"
     }));
 
 

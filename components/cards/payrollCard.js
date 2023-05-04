@@ -12,10 +12,10 @@ import Button from "@mui/material/Button";
 export default function PayrollCard(payroll) {
 
     let copyText = `Jméno: ${payroll.name}, \n` +
-    `Částka: ${payroll.amount}\n`;
+    `Částka: ${payroll.amount}`;
 
     if(payroll.bankAccount !== null) {
-        copyText += `Č. účtu: ${payroll.bankAccount}`;
+        copyText += `,\nČ. účtu: ${payroll.bankAccount}`;
     }
 
 
