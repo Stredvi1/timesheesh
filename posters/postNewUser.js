@@ -19,5 +19,9 @@ export default async function addUser(props) {
 
     const response = await fetch(apiUrlEndpoint, postData);
 
-    return response.ok;
+    console.log(response);
+
+    if (response.ok) {
+        return true;
+    }
 }

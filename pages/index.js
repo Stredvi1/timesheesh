@@ -36,12 +36,12 @@ export default function Home() {
         let admin = {};
         admin.name = 'Admin';
         admin.surname = 'Admin';
-        admin.birtNumber = '999999/0000';
+        admin.birthNumber = '999999/0000';
         admin.email = 'admin@admin.admin';
         admin.password = 'admin1234';
         admin.type = 1;
-        admin.bankAccount = '';
-        admin.bankCode = '';
+        admin.bankAccount = null;
+        admin.bankCode = null;
 
         console.log(admin)
         add(admin);

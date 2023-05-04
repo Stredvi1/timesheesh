@@ -51,8 +51,11 @@ export default async function handler(req, res) {
 
     try {
         validData = await RegistrationSchema.validate(req.body);
+
     } catch (error) {
+        console.log(12, error)
         return res.status(500).json({error});
+
     }
 
     try {
@@ -76,6 +79,7 @@ export default async function handler(req, res) {
         await query({query: querySQL, values: valueParams});
 
         res.status(201).json({success: true});
+        console.log(68, 'OHEEEAAY')
 
     } catch (error) {
         console.log(43, error)
