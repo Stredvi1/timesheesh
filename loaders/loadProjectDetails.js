@@ -58,6 +58,7 @@ export default function load() {
                                 <Typography><strong>Budget: </strong>{currency(project.budget)}</Typography>
                                 <Typography><strong>Odpracováno: </strong>{currency(project.amount)}</Typography>
                                 <Typography><strong>Deadline: </strong>{date(project.deadline)}</Typography>
+                                <Typography><strong>Počet aktivit: </strong>{project.activityCount}</Typography>
                                 <Typography><i>{project.note}</i></Typography>
 
                             </Box>

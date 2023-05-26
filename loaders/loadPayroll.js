@@ -16,7 +16,6 @@ export default function load() {
     const {data: session, status} = useSession();
 
     const id = session?.user.id;
-    console.log(155, id)
 
     useEffect(() => {
         async function getPageData() {
@@ -33,7 +32,6 @@ export default function load() {
             if (response.ok) {
                 const res = await response.json();
                 setDataResponse(res.payroll);
-                console.log(1, res.payroll);
             }
 
         }
@@ -63,6 +61,7 @@ export default function load() {
                                 name={payroll.fullName}
                                 amount={payroll.amount}
                                 bankAccount={payroll.bankAccount}
+                                worktime={payroll.worktime}
                             />
                         )
                     }

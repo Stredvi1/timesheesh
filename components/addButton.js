@@ -4,7 +4,14 @@ import Link from "next/link";
 import {Typography} from "@mui/material";
 import {useRouter} from "next/router";
 
-export default function addButton({url, name, useId}) {
+export default function addButton({url, name, useId, x, y}) {
+
+    if(x == null) {
+        x = (theme) => theme.spacing(6);
+    }
+    if(y == null) {
+        y = (theme) => theme.spacing(18);
+    }
 
     if (useId) {
 
@@ -20,8 +27,8 @@ export default function addButton({url, name, useId}) {
                      variant="extended"
                      sx={{
                          position: "fixed",
-                         bottom: (theme) => theme.spacing(18),
-                         right: (theme) => theme.spacing(6)
+                         bottom: y,
+                         right: x
                      }}>
                     <AddIcon/>
                     <Typography>
@@ -40,8 +47,8 @@ export default function addButton({url, name, useId}) {
                      variant="extended"
                      sx={{
                          position: "fixed",
-                         bottom: (theme) => theme.spacing(18),
-                         right: (theme) => theme.spacing(6)
+                         bottom: y,
+                         right: x
                      }}>
                     <AddIcon/>
                     <Typography>

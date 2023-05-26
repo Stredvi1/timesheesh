@@ -2,7 +2,7 @@ import {styled} from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import {Stack, Typography} from "@mui/material";
 import React from "react";
-import date from "@/utils/formatters/dateTimeFormatter";
+import time from "@/utils/formatters/worktimeFormatter";
 import currency from "../../utils/formatters/currencyFormatter";
 import {Conditional} from "@/utils/Conditional";
 import Button from "@mui/material/Button";
@@ -12,7 +12,8 @@ import Button from "@mui/material/Button";
 export default function PayrollCard(payroll) {
 
     let copyText = `Jméno: ${payroll.name}, \n` +
-    `Částka: ${payroll.amount}`;
+    `Částka: ${currency(payroll.amount)},\n` +
+    `Odpracováno: ${time(payroll.worktime)}`;
 
     if(payroll.bankAccount !== null) {
         copyText += `,\nČ. účtu: ${payroll.bankAccount}`;
@@ -36,6 +37,7 @@ export default function PayrollCard(payroll) {
             }}>
                 <Typography variant={"h4"}>{payroll.name}</Typography>
                 <Typography><strong>Částka: </strong>{currency(payroll.amount)}</Typography>
+                <Typography><strong>Odpracováno: </strong>{time(payroll.worktime)}</Typography>
                 <Conditional showWhen={payroll.bankAccount !== null}>
                     <Typography><strong>Číslo účtu: </strong>{payroll.bankAccount}</Typography>
                 </Conditional>

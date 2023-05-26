@@ -48,7 +48,7 @@ export default function LoginForm() {
                        sx={{mt: '10%'}}>
                     <Box padding={4}
                          alignItems="center">
-                        <Typography variant="h1">TimeSheet</Typography>
+                        <Typography variant="h1">TimeShift</Typography>
                         <Stack
                             direction="column"
                             spacing={2}

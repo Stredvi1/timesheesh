@@ -8,13 +8,17 @@ import AddProject from "../components/addButton";
 import Payroll from "@/loaders/loadPayroll";
 import {useSession} from "next-auth/react";
 import {Conditional} from "@/utils/Conditional";
+import {useEffect} from "react";
+import details1 from "@/loaders/loadProjectDetails1";
 
 
 
 export default function Overview() {
-
     const {data: session, status} = useSession();
+    useEffect(() => {
 
+
+    }, [session]);
     return (
         <>
             <div className={styles.wrapper}>
@@ -24,9 +28,10 @@ export default function Overview() {
                <Stack
                direction={"row"}>
 
-                        <Projects/>
-
                    <Conditional showWhen={status === "authenticated"}>
+                        <Projects/>
+                   </Conditional>
+                   <Conditional showWhen={status === "authenticated" && session?.user.role !== 4}>
                        <Payroll/>
                    </Conditional>
                </Stack>

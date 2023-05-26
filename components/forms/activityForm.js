@@ -97,8 +97,8 @@ export default function ActivityForm() {
                                         defaultValue=""
                                         required
                                         {...formik.getFieldProps('worker')}
-                                        error={formik.touched.worker && Boolean(formik.errors.worker)}
-                                        helperText={formik.touched.worker && formik.errors.worker}
+                                        error={formik.touched.watcher && Boolean(formik.errors.watcher)}
+                                        helperText={formik.touched.watcher && formik.errors.watcher}
                                     >
                                         {workers.map((worker) => {
                                             return (
