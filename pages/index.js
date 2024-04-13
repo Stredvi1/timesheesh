@@ -31,7 +31,7 @@ export default function Home() {
         }
     }
 
-    if(search.get('createAdmin') == 1){
+    if(search.get('createAdmin') === 1){
         //todo solve admin creation
         let admin = {};
         admin.name = 'Admin';

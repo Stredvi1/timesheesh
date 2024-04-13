@@ -3,6 +3,7 @@ import Paper from '@mui/material/Paper';
 import {Typography} from "@mui/material";
 import date from "../../utils/formatters/dateTimeFormatter";
 import time from "../../utils/formatters/worktimeFormatter";
+import RemoveButton from "@/components/removeButton";
 
 
 export default function RecordCard(record) {
@@ -20,6 +21,7 @@ export default function RecordCard(record) {
             <Typography><strong>Odpracováno: </strong>{time(record.workingTime)}</Typography>
             <Typography><strong>Poznámka:</strong></Typography>
             <Typography><i>{record.text}</i></Typography>
+            <RemoveButton remove="record" recordID={record.id} textOnly={true} />
         </RecordCard>
     )
 }

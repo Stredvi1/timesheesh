@@ -3,6 +3,7 @@ import Details from "../../loaders/loadProjectDetails";
 import details1 from "../../loaders/loadProjectDetails1";
 import Activities from "../../loaders/loadProjectActivities";
 import AddButton from "../../components/addButton";
+import RemoveButton from "../../components/removeButton";
 import {useSession} from "next-auth/react";
 import {Conditional} from "@/utils/Conditional";
 import {Box, Stack, Typography} from "@mui/material";
@@ -10,6 +11,8 @@ import currency from "@/utils/formatters/currencyFormatter";
 import date from "@/utils/formatters/dateTimeFormatter";
 import Progress from "@/components/progressCircle";
 import percentage from "@/utils/percentage";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/pages/api/auth/[...nextauth]";
 
 export default function ProjectDetails() {
 
@@ -59,9 +62,23 @@ export default function ProjectDetails() {
                 <Conditional showWhen={session?.user.role !== 4}>
                     <AddButton url={"/newActivity"} name={"Aktivitu"} useId={true}/>
                     <AddButton url={"/addWatcher"} name={"Sledujícího"} useId={true} x={(theme) => theme.spacing(32)}/>
+                    <RemoveButton remove={"project"} textOnly={false} x={(theme) => theme.spacing(60)}/>
                 </Conditional>
 
             </div>
+
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    return {
+        props: {
+            session: await getServerSession(
+                context.req,
+                context.res,
+                authOptions
+            ),
+        },
+    }
 }

@@ -11,6 +11,7 @@ import time from "@/utils/formatters/worktimeFormatter";
 import currency from "@/utils/formatters/currencyFormatter";
 import Progress from "@/components/progressCircle";
 import percentage from "@/utils/percentage";
+import RemoveButton from "@/components/removeButton";
 
 
 export default function Activity() {
@@ -78,6 +79,7 @@ export default function Activity() {
 
                     <Conditional showWhen={status !== 'loading' && details[0]?.tUserID === session?.user.id && session?.user.role !== 4}>
                         <AddRecord/>
+                        <RemoveButton remove={"activity"} textOnly={false} y={(theme) => theme.spacing(10)}/>
                     </Conditional>
 
                 </Stack>
